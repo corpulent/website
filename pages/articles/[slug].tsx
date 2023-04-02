@@ -23,9 +23,10 @@ export interface IViewArticleProps {
   page: PageObjectResponse;
 }
 
-const ViewArticle: TNextPageWithLayout<IViewArticleProps> = (props: IViewArticleProps) => {
+const ViewArticle: TNextPageWithLayout<IViewArticleProps> = (
+  props: IViewArticleProps
+) => {
   const { blocks, page } = props;
-  console.log(blocks, page);
   return (
     <Root>
       <Title>{(page.properties as any).title.title[0].plain_text}</Title>
@@ -39,17 +40,20 @@ ViewArticle.getLayout = (children: ReactElement): ReactElement => {
 };
 
 export async function getStaticPaths() {
-  const pages = await notion.getPages("f0cb2ac9f04c43468d9dae0aba17af01");
+  const slugs = await notion.getSlugs("f0cb2ac9f04c43468d9dae0aba17af01");
   return {
-    paths: pages.results
-      .filter((block: any) => block.type === "child_page")
-      .map((page: any) => ({ params: { articleId: page.id.replaceAll("-", "") } })),
+    paths: slugs.map((slug: string) => ({
+      params: { slug },
+    })),
     fallback: false,
   };
 }
 
 export async function getStaticProps(context: any) {
-  const props = await notion.getPage(context.params.articleId);
+  const props = await notion.getPage(
+    "f0cb2ac9f04c43468d9dae0aba17af01",
+    context.params.slug
+  );
   return {
     props,
   };
