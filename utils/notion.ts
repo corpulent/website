@@ -4,7 +4,7 @@ import { GetPageResponse } from "@notionhq/client/build/src/api-endpoints";
 
 // Initializing a client
 const notion = new Client({
-  auth: "secret_frsciTWcNEAOn4xuMmIaJGk9mezm5834BTK3lHwAcz8",
+  auth: process.env.NOTION_API_KEY,
 });
 
 let cachedPages: any = null;

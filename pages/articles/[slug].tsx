@@ -40,7 +40,8 @@ ViewArticle.getLayout = (children: ReactElement): ReactElement => {
 };
 
 export async function getStaticPaths() {
-  const slugs = await notion.getSlugs("f0cb2ac9f04c43468d9dae0aba17af01");
+  const slugs = await notion.getSlugs(process.env.ROOT_PAGE_ID!);
+  console.log("Loaded slugs:", slugs);
   return {
     paths: slugs.map((slug: string) => ({
       params: { slug },
@@ -51,7 +52,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: any) {
   const props = await notion.getPage(
-    "f0cb2ac9f04c43468d9dae0aba17af01",
+    process.env.ROOT_PAGE_ID!,
     context.params.slug
   );
   return {
