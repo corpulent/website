@@ -18,7 +18,7 @@ const StyledToolbar = styled(Toolbar)`
 export const Navbar: FunctionComponent = (): ReactElement => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" elevation={0}>
+      <AppBar position="static" elevation={0} sx={{ background: "white" }}>
         <StyledToolbar>
           <Link href="/">
             <StyledSvg
