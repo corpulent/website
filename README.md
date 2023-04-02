@@ -1,34 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# OuterMeasure Website
+
+This project was written in [Next.js](https://nextjs.org), project bootstrapped
+with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+The articles data is pulled from Notion via Notion Integrations. As of this writing,
+an internal integration is used.
+
+1. Open [https://www.notion.so/my-integrations](https://www.notion.so/my-integrations)
+   with your browser.
+2. Login to your account
+3. Click on "Create new integration"
+4. Give your integration a name.
+5. You do not have to specify a logo.
+6. Under "Associated workspace" make sure you select the workspace within which
+   your pages exist.
+7. The website only reads the data from Notion. Therefore, unselect "Read content"
+   and "Update content" in "Content Capabilities" section.
+8. Leave "Comment Capabilities" empty.
+9. Under "User Capabilities", select "No user information".
+10. Click on Submit. This will create an internal integration on Notion and
+    redirect you to "Review and edit integration" screen.
+11. Copy the "Internal Integration Token". This is basically the API key that will
+    be passed to Notion.
+12. Go back to your workspace and create a "root" page.
+13. You need to now link the "root" page with the Notion integration that was created earlier. You can do this by opening the page and clicking on the "..." button on the top right corner. Then `Add connections > Search <YOUR_INTEGRATION_NAME>`.
+14. Now create subpages under the "root" page that you want to view on the website.
+15. Copy the page ID from
+    the URL of your browser. The page ID is a 36 alphanumeric segement at the
+    end of the URL.
+16. In your local repository, create ".env.local" in the repo root with the following entries:
+
+```
+NOTION_API_KEY=...
+ROOT_PAGE_ID=...
+```
+
+17. All the articles are located at `http://localhost:3000/articles/<slug>`.
+    You can see the output of the NextJS server to see all the slugs that were
+    loaded.
+
+Run the following commands to start the dev server:
 
 ```bash
-npm run dev
-# or
+yarn install
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+website.
