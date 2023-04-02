@@ -17,6 +17,7 @@ import {
   BulletedListItemBlock,
   IBulletedListItemBlockProps,
 } from "./BulletedListItemBlock";
+import { IImageBlockProps, ImageBlock } from "./ImageBlock";
 
 const Root = styled("div")``;
 
@@ -33,6 +34,7 @@ const components: Record<
   | FunctionComponent<IHeading3BlockProps>
   | FunctionComponent<INumberedListItemBlockProps>
   | FunctionComponent<IBulletedListItemBlockProps>
+  | FunctionComponent<IImageBlockProps>
 > = {
   paragraph: ParagraphBlock,
   code: CodeBlock,
@@ -41,6 +43,7 @@ const components: Record<
   heading_3: Heading3Block,
   numbered_list_item: NumberedListItemBlock,
   bulleted_list_item: BulletedListItemBlock,
+  image: ImageBlock,
 };
 
 interface IGroup {
@@ -53,7 +56,7 @@ export const NotionRenderer: FunctionComponent<INotionRendererProps> = (
 ): ReactElement => {
   const { page } = props;
 
-  // console.log(page);
+  console.log(page);
 
   const renderBlock = (block: BlockObjectResponse) => {
     const Component = components[block.type];
