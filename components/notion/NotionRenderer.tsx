@@ -19,7 +19,13 @@ import {
 } from "./BulletedListItemBlock";
 import { IImageBlockProps, ImageBlock } from "./ImageBlock";
 
-const Root = styled("div")``;
+const Root = styled("div")`
+  display: flex;
+  flex-direction: column;
+
+  font-size: 20px;
+  line-height: 32px;
+`;
 
 export interface INotionRendererProps {
   page: ListBlockChildrenResponse;
@@ -94,7 +100,7 @@ export const NotionRenderer: FunctionComponent<INotionRendererProps> = (
     }
 
     return (
-      <>
+      <Root>
         {groups.map((group, index) => (
           <Fragment key={index}>
             {group.type === "numbered_list_item" && (
@@ -108,7 +114,7 @@ export const NotionRenderer: FunctionComponent<INotionRendererProps> = (
             ) && group.items.map(renderBlock)}
           </Fragment>
         ))}
-      </>
+      </Root>
     );
   };
 

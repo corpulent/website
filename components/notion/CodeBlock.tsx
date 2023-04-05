@@ -3,9 +3,11 @@ import { FunctionComponent, ReactElement, useMemo } from "react";
 import { python } from "@codemirror/lang-python";
 import { CodeBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { styled } from "@mui/material";
+import "./CodeBlock.module.css";
 
 const Root = styled("div")`
   margin-top: ${({ theme }) => theme.spacing(2)};
+  font-size: 12px;
 `;
 
 export interface ICodeBlockProps {

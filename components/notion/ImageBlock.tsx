@@ -1,4 +1,4 @@
-import { Typography, styled } from "@mui/material";
+import { styled } from "@mui/material";
 import { ImageBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { FunctionComponent, ReactElement } from "react";
 
@@ -9,11 +9,12 @@ const Root = styled("figure")`
   align-items: center;
   justify-content: center;
   row-gap: ${({ theme }) => theme.spacing(1)};
+  padding: 0px;
+  margin: 0px;
 `;
 
 const StyledImage = styled("img")`
-  margin-top: ${({ theme }) => theme.spacing(2)};
-  max-width: 800px;
+  max-width: 700px;
   height: auto;
 `;
 
