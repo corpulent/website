@@ -10,7 +10,15 @@ import { TNextPageWithLayout } from "../../types";
 import { ReactElement } from "react";
 import { PrimaryLayout } from "../../components/layouts";
 
-const Root = styled(Container)``;
+const Root = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const MaxWidth = styled("div")`
+  max-width: 700px;
+`;
 
 const Title = styled(Typography)`
   font-size: 45px;
@@ -29,8 +37,10 @@ const ViewArticle: TNextPageWithLayout<IViewArticleProps> = (
   const { blocks, page } = props;
   return (
     <Root>
-      <Title>{(page.properties as any).title.title[0].plain_text}</Title>
-      <NotionRenderer page={blocks} />
+      <MaxWidth>
+        <Title>{(page.properties as any).title.title[0].plain_text}</Title>
+        <NotionRenderer page={blocks} />
+      </MaxWidth>
     </Root>
   );
 };
