@@ -52,6 +52,38 @@ export const getSlugs = async (rootPageId: string): Promise<string[]> => {
   );
 };
 
+let blocksBySlug: Record<string, any> = {};
+
+export const getAllPages = async (rootPageId: string) => {
+  if (Object.keys(blocksBySlug).length > 0) {
+    return blocksBySlug;
+  }
+
+  const pages = await getPages(rootPageId);
+  const pageMetas = await getPageMetas(pages);
+
+  const blocksList = await Promise.all(
+    pageMetas.map((pageMeta: any) =>
+      notion.blocks.children.list({
+        block_id: pageMeta.id,
+      })
+    )
+  );
+
+  blocksBySlug = Object.fromEntries(
+    pageMetas.map((pageMeta: any, index: number) => [
+      slugify((pageMeta as any).properties.title.title[0].plain_text, {
+        replacement: "-",
+        lower: true,
+        trim: true,
+      }),
+      { blocks: blocksList[index], meta: pageMetas[index] },
+    ])
+  );
+
+  return blocksBySlug;
+};
+
 export const getPage = async (rootPageId: string, slug: string) => {
   const pages = await getPages(rootPageId);
   const pageMetas = await getPageMetas(pages);
@@ -77,8 +109,10 @@ export const getPage = async (rootPageId: string, slug: string) => {
     );
   }
 
-  const blocks = await notion.blocks.children.list({
-    block_id: pageMetaBySlug[slug].id,
-  });
+  const blocks =
+    blocksBySlug[slug] ??
+    (await notion.blocks.children.list({
+      block_id: pageMetaBySlug[slug].id,
+    }));
   return { blocks, page: pageMetaBySlug[slug] };
 };
