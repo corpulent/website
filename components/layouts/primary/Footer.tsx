@@ -25,7 +25,7 @@ export const Footer: FunctionComponent = (): ReactElement => {
   return (
     <BottomBar>
       <PrimaryLinks href="/articles">Articles</PrimaryLinks>
-      <PrimaryLinks href="/articles">Contact us</PrimaryLinks>
+      <PrimaryLinks href="/contact-us">Contact us</PrimaryLinks>
     </BottomBar>
   );
 };
