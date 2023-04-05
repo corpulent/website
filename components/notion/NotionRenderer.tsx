@@ -62,15 +62,12 @@ export const NotionRenderer: FunctionComponent<INotionRendererProps> = (
 ): ReactElement => {
   const { page } = props;
 
-  console.log(page);
-
   const renderBlock = (block: BlockObjectResponse) => {
     const Component = components[block.type];
     if (!Component) {
       console.warn(`Unknown block type "${block.type} -- ignored"`);
       return <Fragment key={block.id} />;
     }
-    // console.log(block);
     return <Component key={block.id} block={block as never} />;
   };
 

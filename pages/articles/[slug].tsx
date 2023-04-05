@@ -51,7 +51,6 @@ ViewArticle.getLayout = (children: ReactElement): ReactElement => {
 
 export async function getStaticPaths() {
   const slugs = await notion.getSlugs(process.env.ROOT_PAGE_ID!);
-  console.log("Loaded slugs:", slugs);
   return {
     paths: slugs.map((slug: string) => ({
       params: { slug },

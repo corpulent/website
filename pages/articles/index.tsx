@@ -95,7 +95,6 @@ const ViewArticles: TNextPageWithLayout<IViewArticlesProps> = (
     page: { meta: any; blocks: ListBlockChildrenResponse }
   ) => {
     const { blocks, meta } = page;
-    console.log(blocks);
     return (
       <StyledListItem key={slug}>
         <ItemContent>
@@ -130,7 +129,6 @@ ViewArticles.getLayout = (children: ReactElement): ReactElement => {
 
 export async function getStaticProps(context: any) {
   const blocksBySlug = await notion.getAllPages(process.env.ROOT_PAGE_ID!);
-  console.log(blocksBySlug);
   return {
     props: {
       blocksBySlug,
