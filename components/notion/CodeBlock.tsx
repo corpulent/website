@@ -18,10 +18,18 @@ export const CodeBlock: FunctionComponent<ICodeBlockProps> = (
   props: ICodeBlockProps
 ): ReactElement => {
   const { block } = props;
-  const code = useMemo(() => block.code.rich_text.map((text) => text.plain_text).join("\n"), []);
+  const code = useMemo(
+    () => block.code.rich_text.map((text) => text.plain_text).join("\n"),
+    [block.code.rich_text]
+  );
   return (
     <Root>
-      <CodeMirror value={code} extensions={[python()]} theme="dark" readOnly={true} />
+      <CodeMirror
+        value={code}
+        extensions={[python()]}
+        theme="dark"
+        readOnly={true}
+      />
     </Root>
   );
 };
