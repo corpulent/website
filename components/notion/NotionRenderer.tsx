@@ -77,6 +77,7 @@ export const NotionRenderer: FunctionComponent<INotionRendererProps> = (
   const renderGroups = (blocks: BlockObjectResponse[]) => {
     /* Determine blocks that need to be grouped under a single parent. */
     const groups: IGroup[] = [];
+
     for (let i = 0; i < blocks.length; i++) {
       const block = blocks[i];
       if (["numbered_list_item", "bulleted_list_item"].includes(block.type)) {
@@ -118,5 +119,5 @@ export const NotionRenderer: FunctionComponent<INotionRendererProps> = (
     );
   };
 
-  return <Root>{renderGroups(page.results as any)}</Root>;
+  return <Root>{page.results && renderGroups(page.results as any)}</Root>;
 };
