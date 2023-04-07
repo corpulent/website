@@ -67,9 +67,8 @@ export const ParagraphBlock: FunctionComponent<IParagraphBlockProps> = (
     const Component = code ? Code : Span;
 
     return (
-      <Wrapper href={richText.href ?? undefined}>
+      <Wrapper key={index} href={richText.href ?? undefined}>
         <Component
-          key={index}
           style={{
             fontWeight: bold ? "bold" : "normal",
             fontStyle: italic ? "italic" : "normal",
