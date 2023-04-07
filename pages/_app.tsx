@@ -1,7 +1,6 @@
 import { ReactElement } from "react";
 
 import type { AppProps } from "next/app";
-import Head from "next/head";
 
 import { TGetLayoutFunction, TNextPageWithLayout } from "../types";
 

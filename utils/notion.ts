@@ -110,7 +110,7 @@ export const getPage = async (rootPageId: string, slug: string) => {
   }
 
   const blocks =
-    blocksBySlug[slug] ??
+    blocksBySlug[slug]?.blocks ??
     (await notion.blocks.children.list({
       block_id: pageMetaBySlug[slug].id,
     }));
