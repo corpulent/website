@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import { PrimaryLayout } from "../components/layouts";
 import { TNextPageWithLayout } from "../types";
 import { Container, Typography, styled } from "@mui/material";
+import { TypeAnimation } from "react-type-animation";
 
 const Root = styled("div")``;
 
@@ -23,12 +24,6 @@ const HeroTitle = styled(Typography)`
   font-family: "Josefin Sans";
 `;
 
-const Highlight = styled("span")`
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 16px;
-`;
-
 const DetailsContainer = styled(Container)`
   display: flex;
   flex-direction: column;
@@ -47,12 +42,30 @@ const Home: TNextPageWithLayout = () => {
     <Root>
       <Hero>
         <HeroTitle>
-          We specialize in building
+          We help organizations build <br />
+          <TypeAnimation
+            sequence={[
+              "modern",
+              2000,
+              "cloud-native",
+              2000,
+              "machine learning",
+              2000,
+            ]}
+            wrapper="span"
+            cursor={true}
+            repeat={Infinity}
+            style={{
+              fontSize: "2em",
+              display: "inline-block",
+              textDecoration: "underline",
+              textUnderlineOffset: 16,
+              fontFamily: "Josefin Sans",
+              fontWeight: 700
+            }}
+          />
           <br />
-          <Highlight>Airflow</Highlight> and{" "}
-          <Highlight>Argo Workflows</Highlight>
-          <br />
-          data pipelines for processing
+          optimized data pipelines
         </HeroTitle>
       </Hero>
       <DetailsContainer>
