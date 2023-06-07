@@ -3,15 +3,17 @@ import { PrimaryLayout } from "../components/layouts";
 import { TNextPageWithLayout } from "../types";
 import { Container, Typography, styled } from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
+import Image from "next/image";
 
 const Root = styled("div")``;
 
 const Hero = styled(Container)`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: calc(100vh - 104px);
+  row-gap: ${({ theme }) => theme.spacing(8)};
 `;
 
 const HeroTitle = styled(Typography)`
@@ -22,6 +24,24 @@ const HeroTitle = styled(Typography)`
   text-align: center;
   color: black;
   font-family: "Josefin Sans";
+`;
+
+const StyledTypeAnimation = styled(TypeAnimation)`
+  font-size: 2em;
+  display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 16px;
+  font-family: "Josefin Sans";
+  font-weight: 700;
+  margin-top: 8px;
+`;
+
+const LogoContainer = styled("div")`
+  display: flex;
+  flex-direction: row;
+  column-gap: ${({ theme }) => theme.spacing(8)};
+  justify-content: center;
+  align-items: center;
 `;
 
 const DetailsContainer = styled(Container)`
@@ -43,7 +63,7 @@ const Home: TNextPageWithLayout = () => {
       <Hero>
         <HeroTitle>
           We help organizations build <br />
-          <TypeAnimation
+          <StyledTypeAnimation
             sequence={[
               "modern",
               2000,
@@ -55,18 +75,36 @@ const Home: TNextPageWithLayout = () => {
             wrapper="span"
             cursor={true}
             repeat={Infinity}
-            style={{
-              fontSize: "2em",
-              display: "inline-block",
-              textDecoration: "underline",
-              textUnderlineOffset: 16,
-              fontFamily: "Josefin Sans",
-              fontWeight: 700
-            }}
           />
           <br />
           optimized data pipelines
         </HeroTitle>
+        <LogoContainer>
+          <Image
+            src="/argo-icon.svg"
+            alt="Argo icon"
+            width={100}
+            height={100}
+          />
+          <Image
+            src="/airflow-icon.svg"
+            alt="Airflow icon"
+            width={75}
+            height={75}
+          />
+          <Image
+            src="/dagster-icon.svg"
+            alt="Dagster icon"
+            width={125}
+            height={125}
+          />
+          <Image
+            src="/mulesoft-icon.svg"
+            alt="Mulesoft icon"
+            width={90}
+            height={90}
+          />
+        </LogoContainer>
       </Hero>
       <DetailsContainer>
         <Details>
