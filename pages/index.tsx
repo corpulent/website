@@ -27,7 +27,7 @@ const HeroTitle = styled(Typography)`
 `;
 
 const StyledTypeAnimation = styled(TypeAnimation)`
-  font-size: 2em;
+  font-size: 50px;
   display: inline-block;
   text-decoration: underline;
   text-underline-offset: 16px;
