@@ -4,6 +4,8 @@ import { TNextPageWithLayout } from "../types";
 import { Container, Typography, styled } from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
+import * as notion from "../utils/notion";
+import { ViewArticles } from "../components/common";
 
 const Root = styled("div")``;
 
@@ -57,7 +59,13 @@ const Details = styled(Typography)`
   font-weight: 400;
 `;
 
-const Home: TNextPageWithLayout = () => {
+export interface IHomeProps {
+  blocksBySlug: Record<string, any>;
+}
+
+const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
+  const { blocksBySlug } = props;
+
   return (
     <Root>
       <Hero>
@@ -136,6 +144,7 @@ const Home: TNextPageWithLayout = () => {
           organization.
         </Details>
       </DetailsContainer>
+      <ViewArticles blocksBySlug={blocksBySlug} />
     </Root>
   );
 };
@@ -143,5 +152,14 @@ const Home: TNextPageWithLayout = () => {
 Home.getLayout = (children: ReactElement): ReactElement => {
   return <PrimaryLayout>{children}</PrimaryLayout>;
 };
+
+export async function getStaticProps(context: any) {
+  const blocksBySlug = await notion.getAllPages(process.env.ROOT_PAGE_ID!);
+  return {
+    props: {
+      blocksBySlug,
+    },
+  };
+}
 
 export default Home;
