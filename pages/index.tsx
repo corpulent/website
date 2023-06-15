@@ -1,7 +1,13 @@
 import { ReactElement } from "react";
 import { PrimaryLayout } from "../components/layouts";
 import { TNextPageWithLayout } from "../types";
-import { Container, Typography, styled } from "@mui/material";
+import {
+  Container,
+  Typography,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
 import * as notion from "../utils/notion";
@@ -16,6 +22,10 @@ const Hero = styled(Container)`
   align-items: center;
   height: calc(100vh - 104px);
   row-gap: ${({ theme }) => theme.spacing(8)};
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    min-height: calc(100vh - 96px);
+  }
 `;
 
 const HeroTitle = styled(Typography)`
@@ -26,6 +36,11 @@ const HeroTitle = styled(Typography)`
   text-align: center;
   color: black;
   font-family: "Josefin Sans";
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    font-size: 24px;
+    line-height: 48px;
+  }
 `;
 
 const StyledTypeAnimation = styled(TypeAnimation)`
@@ -36,6 +51,11 @@ const StyledTypeAnimation = styled(TypeAnimation)`
   font-family: "Josefin Sans";
   font-weight: 700;
   margin-top: 8px;
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    font-size: 28px;
+    margin: ${({ theme }) => theme.spacing(1, 0, 2, 0)};
+  }
 `;
 
 const LogoContainer = styled("div")`
@@ -44,6 +64,10 @@ const LogoContainer = styled("div")`
   column-gap: ${({ theme }) => theme.spacing(8)};
   justify-content: center;
   align-items: center;
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    column-gap: ${({ theme }) => theme.spacing(3)};
+  }
 `;
 
 const DetailsContainer = styled(Container)`
@@ -57,14 +81,51 @@ const Details = styled(Typography)`
   line-height: 40px;
   font-family: "Josefin Sans";
   font-weight: 400;
+
+  ${({ theme }) => theme.breakpoints.down("sm")} {
+    font-size: 20px;
+  }
+`;
+
+const ViewArticlesContainer = styled("div")`
+  margin-top: ${({ theme }) => theme.spacing(4)};
 `;
 
 export interface IHomeProps {
   blocksBySlug: Record<string, any>;
 }
 
+const logos = [
+  {
+    url: "/argo-icon.svg",
+    alt: "Argo icon",
+    width: 100,
+    height: 100,
+  },
+  {
+    url: "/airflow-icon.svg",
+    alt: "Airflow icon",
+    width: 75,
+    height: 75,
+  },
+  {
+    url: "/dagster-icon.svg",
+    alt: "Dagster icon",
+    width: 120,
+    height: 120,
+  },
+  {
+    url: "/mulesoft-icon.svg",
+    alt: "Mulesoft icon",
+    width: 90,
+    height: 90,
+  },
+];
+
 const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
   const { blocksBySlug } = props;
+  const theme = useTheme();
+  const largeScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
     <Root>
@@ -88,30 +149,15 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
           optimized data pipelines
         </HeroTitle>
         <LogoContainer>
-          <Image
-            src="/argo-icon.svg"
-            alt="Argo icon"
-            width={100}
-            height={100}
-          />
-          <Image
-            src="/airflow-icon.svg"
-            alt="Airflow icon"
-            width={75}
-            height={75}
-          />
-          <Image
-            src="/dagster-icon.svg"
-            alt="Dagster icon"
-            width={125}
-            height={125}
-          />
-          <Image
-            src="/mulesoft-icon.svg"
-            alt="Mulesoft icon"
-            width={90}
-            height={90}
-          />
+          {logos.map((logo) => (
+            <Image
+              key={logo.url}
+              src={logo.url}
+              alt={logo.alt}
+              width={logo.width * (largeScreen ? 1 : 0.6)}
+              height={logo.height * (largeScreen ? 1 : 0.6)}
+            />
+          ))}
         </LogoContainer>
       </Hero>
       <DetailsContainer>
@@ -144,7 +190,9 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
           organization.
         </Details>
       </DetailsContainer>
-      <ViewArticles blocksBySlug={blocksBySlug} />
+      <ViewArticlesContainer>
+        <ViewArticles blocksBySlug={blocksBySlug} />
+      </ViewArticlesContainer>
     </Root>
   );
 };
