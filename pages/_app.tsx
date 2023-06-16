@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 import type { AppProps } from "next/app";
 
 import { TGetLayoutFunction, TNextPageWithLayout } from "../types";
+import Head from "next/head";
 
 export type TCustomAppProps = AppProps & {
   Component: TNextPageWithLayout;
@@ -16,6 +17,22 @@ const CustomApp = (props: TCustomAppProps): ReactElement => {
 
   return (
     <>
+      <Head>
+        <title>OuterMeasure</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="OuterMeasure helps organizations build modern, cloud-native, and machine learning optimized data pipelines."
+        />
+        <meta property="og:title" content="OuterMeasure" />
+        <meta
+          property="og:description"
+          content="OuterMeasure helps organizations build modern, cloud-native, and machine learning optimized data pipelines."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://outermeasure.com/" />
+        <meta property="og:image" content="/logo.svg" />
+      </Head>
       {getLayout(<Component {...pageProps} />)}
     </>
   );

@@ -130,7 +130,7 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
   return (
     <Root>
       <Hero>
-        <HeroTitle>
+        <HeroTitle variant="h1">
           We help organizations build <br />
           <StyledTypeAnimation
             sequence={[
