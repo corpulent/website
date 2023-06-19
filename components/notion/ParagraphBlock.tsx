@@ -76,14 +76,14 @@ export const ParagraphBlock: FunctionComponent<IParagraphBlockProps> = (
               strikethrough ? "strikethrough" : "",
               underline ? "underline" : "",
             ].join(" "),
-            color: color.endsWith("_background")
-              ? undefined
-              : color === "default" && richText.href
-              ? undefined
-              : colorMapping[color],
-            backgroundColor: color.endsWith("_background")
-              ? colorMapping[color]
-              : undefined,
+            // color: color.endsWith("_background")
+            //   ? undefined
+            //   : color === "default" && richText.href
+            //   ? undefined
+            //   : colorMapping[color],
+            // backgroundColor: color.endsWith("_background")
+            //   ? colorMapping[color]
+            //   : undefined,
           }}
         >
           {richText.plain_text}

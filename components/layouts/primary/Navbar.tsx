@@ -1,6 +1,6 @@
-import { AppBar, Box, Toolbar, styled, useTheme } from "@mui/material";
+import { AppBar, Box, Button, Icon, Toolbar, styled } from "@mui/material";
 import Link from "next/link";
-import { FunctionComponent, ReactElement } from "react";
+import { FunctionComponent, ReactElement, useCallback, useState } from "react";
 
 const StyledSvg = styled("svg")`
   width: 32px;
@@ -15,10 +15,23 @@ const StyledToolbar = styled(Toolbar)`
   align-items: center;
 `;
 
-export const Navbar: FunctionComponent = (): ReactElement => {
+const DarkModeToggle = styled(Button)`
+  border-radius: ${({ theme }) => theme.spacing(1)};
+  width: 40px;
+`;
+
+export interface INavbarProps {
+  onToggleDarkMode: () => void;
+  darkMode: boolean;
+}
+
+export const Navbar: FunctionComponent<INavbarProps> = (
+  props: INavbarProps
+): ReactElement => {
+  const { onToggleDarkMode, darkMode } = props;
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" elevation={0} sx={{ background: "white" }}>
+      <AppBar position="static" elevation={0} color="inherit">
         <StyledToolbar>
           <Link href="/">
             <StyledSvg
@@ -52,6 +65,14 @@ export const Navbar: FunctionComponent = (): ReactElement => {
               />
             </StyledSvg>
           </Link>
+
+          <DarkModeToggle
+            onClick={onToggleDarkMode}
+            size="small"
+            variant="outlined"
+          >
+            <Icon>{darkMode ? "light_mode" : "dark_mode"}</Icon>
+          </DarkModeToggle>
         </StyledToolbar>
       </AppBar>
     </Box>

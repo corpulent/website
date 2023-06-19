@@ -76,7 +76,7 @@ const Actions = styled("div")`
 
 const Action = styled(Link)`
   text-decoration: none;
-  color: #aaaaaa;
+  color: ${({ theme }) => theme.palette.primary.light};
 `;
 
 export interface IViewArticlesProps {

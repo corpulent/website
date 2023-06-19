@@ -34,7 +34,6 @@ const HeroTitle = styled(Typography)`
   font-weight: 600;
   line-height: 96px;
   text-align: center;
-  color: black;
   font-family: "Josefin Sans";
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
