@@ -26,6 +26,10 @@ const Form = styled("form")`
   width: 400px;
   margin-top: ${({ theme }) => theme.spacing(2)};
   row-gap: ${({ theme }) => theme.spacing(2)};
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    width: 100%;
+  }
 `;
 
 const FormTitle = styled(Typography)`
