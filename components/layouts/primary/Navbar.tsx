@@ -69,7 +69,6 @@ export const Navbar: FunctionComponent<INavbarProps> = (
           <DarkModeToggle
             onClick={onToggleDarkMode}
             size="small"
-            variant="outlined"
           >
             <Icon>{darkMode ? "light_mode" : "dark_mode"}</Icon>
           </DarkModeToggle>

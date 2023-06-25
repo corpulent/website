@@ -20,7 +20,7 @@ const Hero = styled(Container)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 104px);
+  height: calc(100vh - 204px);
   row-gap: ${({ theme }) => theme.spacing(8)};
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
@@ -30,11 +30,11 @@ const Hero = styled(Container)`
 
 const HeroTitle = styled(Typography)`
   max-width: 1000px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 600;
-  line-height: 96px;
+  line-height: 66px;
   text-align: center;
-  font-family: "Josefin Sans";
+  font-family: "Roboto Slab";
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     font-size: 24px;
@@ -43,16 +43,13 @@ const HeroTitle = styled(Typography)`
 `;
 
 const StyledTypeAnimation = styled(TypeAnimation)`
-  font-size: 50px;
+  font-size: 40px;
   display: inline-block;
-  text-decoration: underline;
-  text-underline-offset: 16px;
-  font-family: "Josefin Sans";
+  font-family: "Roboto Slab";
   font-weight: 700;
-  margin-top: 8px;
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
-    font-size: 28px;
+    font-size: 24px;
     margin: ${({ theme }) => theme.spacing(1, 0, 2, 0)};
   }
 `;
@@ -76,10 +73,9 @@ const DetailsContainer = styled(Container)`
 `;
 
 const Details = styled(Typography)`
-  font-size: 24px;
-  line-height: 40px;
-  font-family: "Josefin Sans";
-  font-weight: 400;
+  font-size: 18px;
+  line-height: 38px;
+  font-family: "Roboto Slab";
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     font-size: 20px;
@@ -130,14 +126,14 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
     <Root>
       <Hero>
         <HeroTitle variant="h1">
-          We help organizations build <br />
+          We partner with organizations to <br />
           <StyledTypeAnimation
             sequence={[
-              "modern",
+              "optimize their operations",
               2000,
-              "cloud-native",
+              "reduce technical debt",
               2000,
-              "AI optimized",
+              "reduce cloud costs",
               2000,
             ]}
             wrapper="span"
@@ -145,7 +141,7 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
             repeat={Infinity}
           />
           <br />
-          data pipelines
+          with modern, cloud native solutions.
         </HeroTitle>
         <LogoContainer>
           {logos.map((logo) => (
@@ -161,32 +157,13 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
       </Hero>
       <DetailsContainer>
         <Details>
-          Our team of experts can assist organizations in streamlining their
-          software development processes by implementing data ops solutions that
-          are tailored to their specific needs. With our help, organizations can
-          achieve faster deployment times, greater collaboration between teams,
-          and improved overall efficiency.
+          We partner with data-centric organizations to help reduce technical debt, decrease cloud costs, identify technical bottlenecks, and optimize operations with modern, cloud native solutions.
         </Details>
         <Details>
-          One of the key solutions we offer is the implementation of Airflow, an
-          open-source platform used for creating, scheduling, and monitoring
-          workflows. Airflow provides a scalable, extensible, and elegant
-          solution for managing complex workflows. Our team can help
-          organizations with the installation, configuration, and customization
-          of Airflow to ensure it meets their unique requirements.
+          We are a team of data engineers, data scientists, and software engineers with experience in a variety of industries including healthcare, finance, and retail.
         </Details>
         <Details>
-          Another solution we offer is the implementation of Argo Workflows, an
-          open-source container-native workflow engine for orchestrating
-          parallel jobs on Kubernetes. Argo Workflows provides a powerful
-          platform for managing complex data pipelines and processing workflows.
-          Our team can help organizations with the installation, configuration,
-          and customization of Argo Workflows to ensure it meets their unique
-          requirements.
-        </Details>
-        <Details>
-          Contact us today to learn more about how we can help your
-          organization.
+          Get in touch with us today to learn how we can help.
         </Details>
       </DetailsContainer>
       <ViewArticlesContainer>
