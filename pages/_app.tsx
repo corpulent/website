@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-query";
 
 import { TGetLayoutFunction, TNextPageWithLayout } from "../types";
+import Script from "next/script";
 import Head from "next/head";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,22 @@ const CustomApp = (props: TCustomAppProps): ReactElement => {
 
   return (
     <>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+
+      <Script strategy="afterInteractive" id="ga">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+            page_path: window.location.pathname,
+            });
+        `}
+      </Script>
+
       <Head>
         <title>Outermeasure</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
