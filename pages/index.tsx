@@ -137,7 +137,7 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
               2000,
               "cloud-native",
               2000,
-              "machine learning",
+              "AI optimized",
               2000,
             ]}
             wrapper="span"
@@ -145,7 +145,7 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
             repeat={Infinity}
           />
           <br />
-          optimized data pipelines
+          data pipelines
         </HeroTitle>
         <LogoContainer>
           {logos.map((logo) => (

@@ -127,7 +127,6 @@ export interface IEnquiry {
 
 export const createEnquiryRow = async (enquiry: IEnquiry): Promise<void> => {
   try {
-    // Create a new row in the Notion database
     const response = await notion.pages.create({
       parent: { database_id: process.env.NOTION_DATABASE_ID! },
       properties: {
@@ -138,8 +137,6 @@ export const createEnquiryRow = async (enquiry: IEnquiry): Promise<void> => {
         Message: { rich_text: [{ text: { content: enquiry.message } }] },
       },
     });
-
-    console.log("Enquiry created:", response);
   } catch (error) {
     console.error("Error creating enquiry:", error);
   }

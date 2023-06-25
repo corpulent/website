@@ -63,7 +63,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
   const handleSubmit = (values: IEnquiryFormValues) => {
     createEnquiryMutation.mutate(values, {
       onSuccess: () => {
-        alert("We've successfully received your message. We'll get back to you ASAP.")
+        alert("We've successfully received your message and will be in touch soon.")
       }
     });
   };
@@ -76,7 +76,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
   return (
     <Root>
       <FormContainer>
-        <FormTitle variant="h1">CONTACT US</FormTitle>
+        <FormTitle variant="h1">Contact us</FormTitle>
         <Form onSubmit={formik.handleSubmit}>
           <TextField
             id="name"
