@@ -6,8 +6,8 @@ import { styled } from "@mui/material";
 import "./CodeBlock.module.css";
 
 const Root = styled("div")`
-  margin-top: ${({ theme }) => theme.spacing(2)};
-  font-size: 12px;
+  margin-top: ${({ theme }) => theme.spacing(1)};
+  font-size: 16px;
 `;
 
 export interface ICodeBlockProps {

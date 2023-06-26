@@ -5,7 +5,8 @@ import { FunctionComponent, ReactElement } from "react";
 const Root = styled("div")``;
 
 const Heading = styled(Typography)`
-  font-size: 20px;
+  font-family: "Roboto Slab";
+  font-size: 18px;
   margin-top: ${({ theme }) => theme.spacing(4)};
 `;
 

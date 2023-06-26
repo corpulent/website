@@ -1,18 +1,11 @@
 import { ListBlockChildrenResponse } from "@notionhq/client/build/src/api-endpoints";
 import { FunctionComponent } from "react";
 
-import { Container, List, ListItem, Typography, styled } from "@mui/material";
+import { List, ListItem, Typography, styled } from "@mui/material";
 import { ParagraphBlock } from "../../components/notion/ParagraphBlock";
 import Link from "next/link";
 
-const Root = styled(Container)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const MaxWidth = styled("div")`
-  max-width: 700px;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(2)};
@@ -21,27 +14,22 @@ const MaxWidth = styled("div")`
 const StyledListItem = styled(ListItem)`
   border-bottom-width: 0.5px;
   border-bottom-style: solid;
-  border-bottom-color: #dadada;
-  height: 256px;
+  border-bottom-color: #efefef;
+  padding: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
-
-const ItemContent = styled("div")`
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
+  margin-top: ${({ theme }) => theme.spacing(4)};
+  padding-bottom: ${({ theme }) => theme.spacing(2)};
   row-gap: ${({ theme }) => theme.spacing(2)};
-  margin-top: ${({ theme }) => theme.spacing(2)};
+  align-items: flex-start;
 `;
 
 const Title = styled(Typography)`
-  font-size: 16px;
+  align-items: left;
+  font-family: "Roboto Slab";
+  font-size: 18px;
   font-weight: 600;
 `;
 
@@ -71,12 +59,17 @@ const Actions = styled("div")`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
 `;
 
 const Action = styled(Link)`
+  font-family: "Roboto Slab";
   text-decoration: none;
   color: ${({ theme }) => theme.palette.primary.light};
+
+  &:hover {
+    color: ${({ theme }) => theme.palette.primary.dark};
+    text-decoration: underline;
+  }
 `;
 
 export interface IViewArticlesProps {
@@ -95,12 +88,10 @@ export const ViewArticles: FunctionComponent<IViewArticlesProps> = (
     const { blocks, meta } = page;
     return (
       <StyledListItem key={slug}>
-        <ItemContent>
-          <Title>{(meta.properties as any).title.title[0].plain_text}</Title>
-          <Content>
-            <ParagraphBlock block={blocks.results[0] as any} />
-          </Content>
-        </ItemContent>
+        <Title>{(meta.properties as any).title.title[0].plain_text}</Title>
+        <Content>
+          <ParagraphBlock block={blocks.results[0] as any} />
+        </Content>
         <Actions>
           <Action href={`/articles/${slug}`}>Read more</Action>
         </Actions>
@@ -109,7 +100,7 @@ export const ViewArticles: FunctionComponent<IViewArticlesProps> = (
   };
 
   return (
-    <Root>
+    <>
       <MaxWidth>
         <List>
           {Object.entries(blocksBySlug).map(([key, value]) =>
@@ -117,6 +108,6 @@ export const ViewArticles: FunctionComponent<IViewArticlesProps> = (
           )}
         </List>
       </MaxWidth>
-    </Root>
+    </>
   );
 };

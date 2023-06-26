@@ -16,10 +16,14 @@ const BottomBar = styled("div")`
 `;
 
 const PrimaryLinks = styled(Link)`
-  color: #333333;
-  text-decoration: none;
-  font-size: 14px;
   font-family: "Roboto Slab";
+  text-decoration: none;
+  color: ${({ theme }) => theme.palette.primary.light};
+
+  &:hover {
+    color: ${({ theme }) => theme.palette.primary.dark};
+    text-decoration: underline;
+  }
 `;
 
 export const Footer: FunctionComponent = (): ReactElement => {

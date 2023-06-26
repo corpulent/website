@@ -20,44 +20,43 @@ const Hero = styled(Container)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 204px);
+  height: calc(100vh - 300px);
   row-gap: ${({ theme }) => theme.spacing(8)};
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
-    min-height: calc(100vh - 96px);
+    min-height: calc(100vh - 200px);
   }
 `;
 
 const HeroTitle = styled(Typography)`
   max-width: 1000px;
-  font-size: 40px;
+  font-size: 26px;
   font-weight: 600;
-  line-height: 66px;
+  line-height: 50px;
   text-align: center;
   font-family: "Roboto Slab";
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     font-size: 24px;
-    line-height: 48px;
+    line-height: 42px;
   }
 `;
 
 const StyledTypeAnimation = styled(TypeAnimation)`
-  font-size: 40px;
+  font-size: 26px;
   display: inline-block;
   font-family: "Roboto Slab";
   font-weight: 700;
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     font-size: 24px;
-    margin: ${({ theme }) => theme.spacing(1, 0, 2, 0)};
   }
 `;
 
 const LogoContainer = styled("div")`
   display: flex;
   flex-direction: row;
-  column-gap: ${({ theme }) => theme.spacing(8)};
+  column-gap: ${({ theme }) => theme.spacing(5)};
   justify-content: center;
   align-items: center;
 
@@ -70,6 +69,10 @@ const DetailsContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   row-gap: ${({ theme }) => theme.spacing(4)};
+
+  ${({ theme }) => theme.breakpoints.down("xl")} {
+    max-width: 800px;
+  }
 `;
 
 const Details = styled(Typography)`
@@ -82,8 +85,16 @@ const Details = styled(Typography)`
   }
 `;
 
-const ViewArticlesContainer = styled("div")`
+const ViewArticlesContainer = styled(Container)`
   margin-top: ${({ theme }) => theme.spacing(4)};
+
+  display: flex;
+  flex-direction: column;
+  row-gap: ${({ theme }) => theme.spacing(4)};
+
+  ${({ theme }) => theme.breakpoints.down("xl")} {
+    max-width: 800px;
+  }
 `;
 
 export interface IHomeProps {
@@ -94,26 +105,26 @@ const logos = [
   {
     url: "/argo-icon.svg",
     alt: "Argo icon",
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
   },
   {
     url: "/airflow-icon.svg",
     alt: "Airflow icon",
-    width: 75,
-    height: 75,
+    width: 55,
+    height: 55,
   },
   {
     url: "/dagster-icon.svg",
     alt: "Dagster icon",
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
   },
   {
     url: "/mulesoft-icon.svg",
     alt: "Mulesoft icon",
-    width: 90,
-    height: 90,
+    width: 70,
+    height: 70,
   },
 ];
 
@@ -149,8 +160,8 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
               key={logo.url}
               src={logo.url}
               alt={logo.alt}
-              width={logo.width * (largeScreen ? 1 : 0.6)}
-              height={logo.height * (largeScreen ? 1 : 0.6)}
+              width={logo.width * (largeScreen ? 0.7 : 0.6)}
+              height={logo.height * (largeScreen ? 0.7 : 0.6)}
             />
           ))}
         </LogoContainer>

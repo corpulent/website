@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import * as notion from "../../utils/notion";
 import { NotionRenderer } from "../../components/notion";
 import {
@@ -17,13 +16,15 @@ const Root = styled(Container)`
 `;
 
 const MaxWidth = styled("div")`
-  max-width: 700px;
+  max-width: 800px;
 `;
 
 const Title = styled(Typography)`
-  font-size: 45px;
+  font-family: "Roboto Slab";
+  font-size: 25px;
   font-weight: 800;
-  margin-top: ${({ theme }) => theme.spacing(4)};
+  margin-top: ${({ theme }) => theme.spacing(2)};
+  margin-bottom: ${({ theme }) => theme.spacing(2)};
 `;
 
 export interface IViewArticleProps {

@@ -6,9 +6,9 @@ import {
 import { FunctionComponent, ReactElement } from "react";
 
 const Root = styled(Typography)`
-  font-size: 20px;
+  font-size: 18px;
   line-height: 32px;
-  margin-top: ${({ theme }) => theme.spacing(2)};
+  margin-top: ${({ theme }) => theme.spacing(1)};
 `;
 
 const Code = styled("code")``;
@@ -16,8 +16,13 @@ const Code = styled("code")``;
 const Span = styled("span")``;
 
 const StyledLink = styled("a")`
-  color: grey;
-  text-underline-offset: 4px;
+  text-decoration: none;
+  color: ${({ theme }) => theme.palette.primary.light};
+
+  &:hover {
+    color: ${({ theme }) => theme.palette.primary.dark};
+    text-decoration: underline;
+  }
 `;
 
 export interface IParagraphBlockProps {

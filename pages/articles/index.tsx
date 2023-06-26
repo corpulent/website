@@ -14,7 +14,7 @@ const Root = styled(Container)`
 `;
 
 const MaxWidth = styled("div")`
-  max-width: 700px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(2)};
@@ -77,8 +77,9 @@ const Actions = styled("div")`
 `;
 
 const Action = styled(Link)`
-    text-decoration: none;
-    color: #aaaaaa;
+  font-family: "Roboto Slab";
+  text-decoration: none;
+  color: #aaaaaa;
 `;
 
 export interface IViewArticlesProps {
