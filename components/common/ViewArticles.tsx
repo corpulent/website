@@ -34,6 +34,7 @@ const Title = styled(Typography)`
 `;
 
 const Content = styled("div")`
+  font-family: "Roboto Slab";
   position: relative;
   max-height: calc(36px * 4);
   overflow: hidden;

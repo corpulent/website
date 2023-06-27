@@ -9,6 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
+import Link from "next/link";
 import Image from "next/image";
 import * as notion from "../utils/notion";
 import { ViewArticles } from "../components/common";
@@ -25,6 +26,17 @@ const Hero = styled(Container)`
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     min-height: calc(100vh - 200px);
+  }
+`;
+
+const PrimaryLinks = styled(Link)`
+  font-family: "Roboto Slab";
+  text-decoration: none;
+  color: ${({ theme }) => theme.palette.primary.light};
+
+  &:hover {
+    color: ${({ theme }) => theme.palette.primary.dark};
+    text-decoration: underline;
   }
 `;
 
@@ -137,16 +149,17 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
     <Root>
       <Hero>
         <HeroTitle variant="h1">
-          We partner with organizations to <br />
+          We help data-centric organizations <br />
           <StyledTypeAnimation
             sequence={[
-              "optimize their operations",
-              2000,
               "reduce technical debt",
-              2000,
+              5000,
+              "optimize operations",
+              5000,
               "reduce cloud costs",
-              2000,
+              5000,
             ]}
+            speed={89}
             wrapper="span"
             cursor={true}
             repeat={Infinity}
@@ -174,7 +187,7 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
           We are a team of data engineers, data scientists, and software engineers with experience in a variety of industries including healthcare, finance, and retail.
         </Details>
         <Details>
-          Get in touch with us today to learn how we can help.
+          Get <PrimaryLinks href="/contact">in touch</PrimaryLinks> with us today to learn how we can help.
         </Details>
       </DetailsContainer>
       <ViewArticlesContainer>

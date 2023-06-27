@@ -75,6 +75,7 @@ export const ParagraphBlock: FunctionComponent<IParagraphBlockProps> = (
       <Wrapper key={index} href={richText.href ?? undefined}>
         <Component
           style={{
+            fontFamily: "Roboto Slab",
             fontWeight: bold ? "bold" : "normal",
             fontStyle: italic ? "italic" : "normal",
             textDecoration: [
