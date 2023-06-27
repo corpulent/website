@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { useFormik } from "formik";
 import {
   Button,
+  CircularProgress,
   Container,
   TextField,
   Typography,
@@ -12,6 +13,27 @@ import { PrimaryLayout } from "../components/layouts";
 import { TNextPageWithLayout } from "../types";
 
 const Root = styled(Container)``;
+
+const MessageContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+`;
+
+const MessageTitle = styled(Typography)`
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+`;
+
+const MessageDescription = styled(Typography)`
+  font-size: 24px;
+  max-width: 600px;
+  text-align: center;
+  margin-top: ${({ theme }) => theme.spacing(2)};
+`;
 
 const FormContainer = styled("div")`
   display: flex;
@@ -61,11 +83,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
   const createEnquiryMutation = useCreateEnquiry();
 
   const handleSubmit = (values: IEnquiryFormValues) => {
-    createEnquiryMutation.mutate(values, {
-      onSuccess: () => {
-        alert("We've successfully received your message and will be in touch soon.")
-      }
-    });
+    createEnquiryMutation.mutate(values);
   };
 
   const formik = useFormik({
@@ -75,83 +93,105 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
 
   return (
     <Root>
-      <FormContainer>
-        <FormTitle variant="h1">Contact us</FormTitle>
-        <Form onSubmit={formik.handleSubmit}>
-          <TextField
-            id="name"
-            name="name"
-            label="Name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
-            fullWidth={true}
-            size="small"
-          />
+      {createEnquiryMutation.isSuccess && (
+        <MessageContainer>
+          <MessageTitle>Thank you</MessageTitle>
+          <MessageDescription>
+            We have received your message. We will be in touch soon.
+          </MessageDescription>
+        </MessageContainer>
+      )}
+      {createEnquiryMutation.isError && (
+        <MessageContainer>
+          <MessageTitle>Something went wrong</MessageTitle>
+          <MessageDescription>
+            An error ocurred while sending your message. Please try again in
+            some time.
+          </MessageDescription>
+        </MessageContainer>
+      )}
+      {(createEnquiryMutation.isIdle || createEnquiryMutation.isLoading) && (
+        <FormContainer>
+          <FormTitle variant="h1">Contact us</FormTitle>
+          <Form onSubmit={formik.handleSubmit}>
+            <TextField
+              id="name"
+              name="name"
+              label="Name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+              fullWidth={true}
+              size="small"
+            />
 
-          <TextField
-            id="jobTitle"
-            name="jobTitle"
-            label="Job Title"
-            value={formik.values.jobTitle}
-            onChange={formik.handleChange}
-            error={formik.touched.jobTitle && Boolean(formik.errors.jobTitle)}
-            helperText={formik.touched.jobTitle && formik.errors.jobTitle}
-            fullWidth={true}
-            size="small"
-          />
+            <TextField
+              id="jobTitle"
+              name="jobTitle"
+              label="Job Title"
+              value={formik.values.jobTitle}
+              onChange={formik.handleChange}
+              error={formik.touched.jobTitle && Boolean(formik.errors.jobTitle)}
+              helperText={formik.touched.jobTitle && formik.errors.jobTitle}
+              fullWidth={true}
+              size="small"
+            />
 
-          <TextField
-            id="company"
-            name="company"
-            label="Company Name"
-            value={formik.values.company}
-            onChange={formik.handleChange}
-            error={formik.touched.company && Boolean(formik.errors.company)}
-            helperText={formik.touched.company && formik.errors.company}
-            fullWidth={true}
-            size="small"
-          />
+            <TextField
+              id="company"
+              name="company"
+              label="Company Name"
+              value={formik.values.company}
+              onChange={formik.handleChange}
+              error={formik.touched.company && Boolean(formik.errors.company)}
+              helperText={formik.touched.company && formik.errors.company}
+              fullWidth={true}
+              size="small"
+            />
 
-          <TextField
-            id="email"
-            name="email"
-            label="Work Email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-            fullWidth={true}
-            size="small"
-          />
+            <TextField
+              id="email"
+              name="email"
+              label="Work Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              fullWidth={true}
+              size="small"
+            />
 
-          <TextField
-            id="message"
-            name="message"
-            label="Message"
-            value={formik.values.message}
-            onChange={formik.handleChange}
-            error={formik.touched.message && Boolean(formik.errors.message)}
-            helperText={formik.touched.message && formik.errors.message}
-            fullWidth={true}
-            multiline={true}
-            rows={4}
-            size="small"
-          />
+            <TextField
+              id="message"
+              name="message"
+              label="Message"
+              value={formik.values.message}
+              onChange={formik.handleChange}
+              error={formik.touched.message && Boolean(formik.errors.message)}
+              helperText={formik.touched.message && formik.errors.message}
+              fullWidth={true}
+              multiline={true}
+              rows={4}
+              size="small"
+            />
 
-          <Submit
-            type="submit"
-            variant="contained"
-            color="primary"
-            size="small"
-            disabled={createEnquiryMutation.isLoading}
-            disableElevation={true}
-          >
-            Submit
-          </Submit>
-        </Form>
-      </FormContainer>
+            <Submit
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="small"
+              disabled={createEnquiryMutation.isLoading}
+              disableElevation={true}
+            >
+              Submit{" "}
+              {createEnquiryMutation.isLoading && (
+                <CircularProgress size={14} sx={{ ml: 1 }} />
+              )}
+            </Submit>
+          </Form>
+        </FormContainer>
+      )}
     </Root>
   );
 };
