@@ -28,10 +28,11 @@ const getPageMetas = async (pages: any): Promise<any> => {
   if (cachedPageMetas) {
     return cachedPageMetas;
   }
+
   const pageMetas = await Promise.all(
-    pages.results.map((page: any) =>
-      notion.pages.retrieve({ page_id: page.id })
-    )
+    pages.results
+      .filter((page: any) => page.type == "child_page")
+      .map((page: any) => notion.pages.retrieve({ page_id: page.id }))
   );
 
   cachedPageMetas = pageMetas;
