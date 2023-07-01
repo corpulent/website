@@ -10,7 +10,7 @@ export const useRecaptcha = (siteKey: string, action: string) => {
   const verifyRecaptchaMutation = useVerifyRecaptcha();
 
   useEffect(() => {
-    if (!ipAddressQuery.data) {
+    if (!ipAddressQuery.isSuccess) {
       return;
     }
 
