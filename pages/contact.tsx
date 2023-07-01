@@ -8,9 +8,10 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { useCreateEnquiry } from "../hooks";
+import { useCreateEnquiry, useRecaptcha } from "../hooks";
 import { PrimaryLayout } from "../components/layouts";
 import { TNextPageWithLayout } from "../types";
+import Recaptcha from "../components/common/Recaptcha";
 
 const Root = styled(Container)``;
 
@@ -91,8 +92,11 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
     onSubmit: handleSubmit,
   });
 
+  useRecaptcha(process.env.NEXT_PUBLIC_SITE_KEY!, "contact");
+
   return (
     <Root>
+      <Recaptcha />
       {createEnquiryMutation.isSuccess && (
         <MessageContainer>
           <MessageTitle>Thank you</MessageTitle>
