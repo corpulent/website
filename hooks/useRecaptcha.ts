@@ -5,10 +5,9 @@ import { useExecuteRecaptcha } from "./useExecuteRecaptcha";
 
 /* TODO: Handle errors! */
 export const useRecaptcha = (siteKey: string, action: string) => {
-  const verifyRecaptchaMutation = useVerifyRecaptcha();
-
   const ipAddressQuery = useIpAddress();
   const executeRecaptchaMutation = useExecuteRecaptcha();
+  const verifyRecaptchaMutation = useVerifyRecaptcha();
 
   useEffect(() => {
     if (!ipAddressQuery.data) {

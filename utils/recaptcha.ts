@@ -8,7 +8,7 @@ interface RecaptchaResponse {
 export const verifyRecaptcha = async (
   responseToken: string,
   userIpAddress: string
-): Promise<void> => {
+): Promise<RecaptchaResponse> => {
   const response: AxiosResponse<RecaptchaResponse> = await axios.post(
     "https://www.google.com/recaptcha/api/siteverify",
     null,
@@ -20,14 +20,7 @@ export const verifyRecaptcha = async (
       },
     }
   );
-
-  const { success, score } = response.data;
-
-  if (success && score >= 0.5) {
-    // The response is valid, take appropriate action
-  } else {
-    // The response is invalid or suspicious, handle accordingly
-  }
+  return response.data;
 };
 
 export const executeRecaptcha = (siteKey: string, action: string) =>
