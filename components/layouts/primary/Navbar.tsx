@@ -3,8 +3,8 @@ import Link from "next/link";
 import { FunctionComponent, ReactElement, useCallback, useState } from "react";
 
 const StyledSvg = styled("svg")`
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   margin-right: ${({ theme }) => theme.spacing(1)};
 `;
 
@@ -34,35 +34,15 @@ export const Navbar: FunctionComponent<INavbarProps> = (
       <AppBar position="static" elevation={0} color="inherit">
         <StyledToolbar>
           <Link href="/">
-            <StyledSvg
-              width="270"
-              height="270"
-              viewBox="0 0 270 270"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M26.0711 110.924C22.1658 107.019 22.1658 100.687 26.0711 96.7817L96.7817 26.071C100.687 22.1658 107.019 22.1658 110.924 26.071L144.866 60.0132C148.771 63.9184 148.771 70.2501 144.866 74.1553L74.1554 144.866C70.2501 148.771 63.9185 148.771 60.0132 144.866L26.0711 110.924Z"
-                fill="#2697EC"
-              />
-              <rect
-                x="118.736"
-                y="109.654"
-                width="120"
-                height="68.0015"
-                rx="10"
-                transform="rotate(-45 118.736 109.654)"
-                fill="#F38432"
-              />
-              <rect
-                x="27.3326"
-                y="202.095"
-                width="120"
-                height="68.0015"
-                rx="10"
-                transform="rotate(-45 27.3326 202.095)"
-                fill="#2E6DE5"
-              />
+            <StyledSvg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M110 220C170.751 220 220 170.751 220 110C220 49.2487 170.751 0 110 0C49.2487 0 0 49.2487 0 110C0 170.751 49.2487 220 110 220ZM110 198.524C158.89 198.524 198.524 158.89 198.524 110C198.524 61.1097 158.89 21.4762 110 21.4762C61.1097 21.4762 21.4762 61.1097 21.4762 110C21.4762 158.89 61.1097 198.524 110 198.524Z" fill="url(#paint0_linear_303_14)"/>
+              <defs>
+                <linearGradient id="paint0_linear_303_14" x1="142.289" y1="66.2189" x2="-28.4577" y2="283.483" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#0047FF"/>
+                  <stop offset="0.213542" stop-color="#0055FF" stop-opacity="0.911458"/>
+                  <stop offset="1" stop-color="#00E0FF" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
             </StyledSvg>
           </Link>
 
