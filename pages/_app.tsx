@@ -46,12 +46,12 @@ const CustomApp = (props: TCustomAppProps): ReactElement => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="OuterMeasure helps organizations build modern, cloud-native, and AI optimized data pipelines."
+          content="We build modern, smart, cloud native data pipelines."
         />
         <meta property="og:title" content="OuterMeasure" />
         <meta
           property="og:description"
-          content="OuterMeasure helps organizations build modern, cloud-native, and AI optimized data pipelines."
+          content="We build modern, smart, cloud native data pipelines."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://outermeasure.com/" />
