@@ -92,7 +92,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
     onSubmit: handleSubmit,
   });
 
-  useRecaptcha(process.env.NEXT_PUBLIC_SITE_KEY!, "contact");
+  useRecaptcha(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, "contact");
 
   return (
     <Root>
