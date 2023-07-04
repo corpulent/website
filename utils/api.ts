@@ -9,7 +9,7 @@ export const createEnquiry = async (enquiry: IEnquiry): Promise<void> => {
 export const verifyRecaptcha = async (
   parameters: IUseVerifyRecaptchaMutationParameters
 ): Promise<void> => {
-  await axios.post("/api/recaptcha/verify", parameters);
+  await axios.post("/api/recaptcha", parameters);
 };
 
 export const getIpAddress = async (): Promise<string> => {
