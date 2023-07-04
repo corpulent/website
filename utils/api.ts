@@ -14,10 +14,8 @@ export const verifyRecaptcha = async (
 
 export const getIpAddress = async (): Promise<string> => {
   try {
-    const response = (await axios.get(
-      "https://api.ipify.org/?format=json"
-    )) as { ip: string };
-    return response.ip;
+    const response = await axios.get("https://api.ipify.org/?format=json");
+    return response.data.ip;
   } catch (error) {
     console.error("Error retrieving IP address: ", error);
     throw error;
