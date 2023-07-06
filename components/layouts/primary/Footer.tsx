@@ -13,6 +13,7 @@ const BottomBar = styled("div")`
   gap: ${({ theme }) => theme.spacing(3)};
 
   margin-top: ${({ theme }) => theme.spacing(4)};
+  margin-bottom: ${({ theme }) => theme.spacing(4)};
 `;
 
 const PrimaryLinks = styled(Link)`

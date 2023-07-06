@@ -42,26 +42,26 @@ const PrimaryLinks = styled(Link)`
 
 const HeroTitle = styled(Typography)`
   max-width: 1000px;
-  font-size: 26px;
+  font-size: 36px;
   font-weight: 600;
   line-height: 50px;
   text-align: center;
   font-family: "Roboto Slab";
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
-    font-size: 24px;
+    font-size: 28px;
     line-height: 42px;
   }
 `;
 
 const StyledTypeAnimation = styled(TypeAnimation)`
-  font-size: 26px;
+  font-size: 36px;
   display: inline-block;
   font-family: "Roboto Slab";
   font-weight: 700;
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
-    font-size: 24px;
+    font-size: 28px;
   }
 `;
 
@@ -81,8 +81,13 @@ const DetailsContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   row-gap: ${({ theme }) => theme.spacing(4)};
+  text-align: center;
 
-  ${({ theme }) => theme.breakpoints.down("xl")} {
+  ${({ theme }) => theme.breakpoints.up("xl")} {
+    max-width: 800px;
+  }
+
+  ${({ theme }) => theme.breakpoints.up("lg")} {
     max-width: 800px;
   }
 `;
@@ -98,14 +103,14 @@ const Details = styled(Typography)`
 `;
 
 const ViewArticlesContainer = styled(Container)`
-  margin-top: ${({ theme }) => theme.spacing(4)};
+  margin-top: ${({ theme }) => theme.spacing(16)};
 
   display: flex;
   flex-direction: column;
   row-gap: ${({ theme }) => theme.spacing(4)};
 
-  ${({ theme }) => theme.breakpoints.down("xl")} {
-    max-width: 800px;
+  ${({ theme }) => theme.breakpoints.up("xl")} {
+    max-width: 1000px;
   }
 `;
 
