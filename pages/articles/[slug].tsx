@@ -16,7 +16,7 @@ const Root = styled(Container)`
 `;
 
 const MaxWidth = styled("div")`
-  max-width: 800px;
+  max-width: 680px;
 `;
 
 const Title = styled(Typography)`

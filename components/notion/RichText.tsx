@@ -4,7 +4,11 @@ import { FunctionComponent, ReactElement } from "react";
 
 const Code = styled("code")``;
 
-const Span = styled("span")``;
+const Span = styled("span")`
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+`;
 
 const StyledLink = styled("a")`
   text-decoration: none;
