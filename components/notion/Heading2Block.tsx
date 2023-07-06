@@ -6,7 +6,7 @@ const Root = styled("div")``;
 
 const Heading = styled(Typography)`
   font-family: "Roboto Slab";
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 500;
   margin-top: ${({ theme }) => theme.spacing(4)};
 `;
