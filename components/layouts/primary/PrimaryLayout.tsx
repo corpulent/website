@@ -29,6 +29,9 @@ export interface IPrimaryLayoutProps {
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
+    background: {
+      default: "#24292d",
+    },
   },
 });
 
