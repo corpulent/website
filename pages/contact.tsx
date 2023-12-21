@@ -72,7 +72,7 @@ const Form = styled("form")`
 `;
 
 const FormTitle = styled(Typography)`
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   text-align: left;
 `;
