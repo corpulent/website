@@ -144,7 +144,6 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 fullWidth={true}
                 size="small"
               />
-
               <TextField
                 id="jobTitle"
                 name="jobTitle"
@@ -158,7 +157,6 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 fullWidth={true}
                 size="small"
               />
-
               <TextField
                 id="company"
                 name="company"
@@ -170,7 +168,6 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 fullWidth={true}
                 size="small"
               />
-
               <TextField
                 id="email"
                 name="email"
@@ -182,7 +179,6 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 fullWidth={true}
                 size="small"
               />
-
               <TextField
                 id="message"
                 name="message"
@@ -196,7 +192,6 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 rows={4}
                 size="small"
               />
-
               <Submit
                 type="submit"
                 variant="contained"
@@ -210,6 +205,28 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                   <CircularProgress size={14} sx={{ ml: 1 }} />
                 )}
               </Submit>
+              {/* You are allowed to hide the badge as long as you include the reCAPTCHA
+                * branding visibly in the user flow.
+                *
+                * See https://stackoverflow.com/a/53749730 for more information.
+                */}
+              <Typography sx={{ fontSize: 12, color: "grey" }}>
+                This site is protected by reCAPTCHA and the Google{" "}
+                <a
+                  style={{ color: "grey" }}
+                  href="https://policies.google.com/privacy"
+                >
+                  Privacy Policy
+                </a>{" "}
+                and{" "}
+                <a
+                  href="https://policies.google.com/terms"
+                  style={{ color: "grey" }}
+                >
+                  Terms of Service
+                </a>{" "}
+                apply.
+              </Typography>
             </Form>
           </StyledCardContent>
         </StyledCard>

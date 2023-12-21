@@ -10,6 +10,7 @@ import {
 import { TGetLayoutFunction, TNextPageWithLayout } from "../types";
 import Script from "next/script";
 import Head from "next/head";
+import "./app.css";
 
 const queryClient = new QueryClient();
 
