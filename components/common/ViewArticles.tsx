@@ -1,7 +1,14 @@
 import { ListBlockChildrenResponse } from "@notionhq/client/build/src/api-endpoints";
 import { FunctionComponent } from "react";
 
-import { List, ListItem, Typography, styled } from "@mui/material";
+import {
+  Button,
+  List,
+  ListItem,
+  Skeleton,
+  Typography,
+  styled,
+} from "@mui/material";
 import { ParagraphBlock } from "../../components/notion/ParagraphBlock";
 import Link from "next/link";
 
@@ -9,6 +16,11 @@ const MaxWidth = styled("div")`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing(2)};
+  max-width: 800px;
+`;
+
+const StyledList = styled(List)`
+  width: 100%;
 `;
 
 const StyledListItem = styled(ListItem)`
@@ -24,20 +36,42 @@ const StyledListItem = styled(ListItem)`
   padding-bottom: ${({ theme }) => theme.spacing(2)};
   row-gap: ${({ theme }) => theme.spacing(2)};
   align-items: flex-start;
+
+  &:last-child {
+    border-bottom-style: none;
+  }
+`;
+
+const ItemTop = styled("div")`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  column-gap: ${({ theme }) => theme.spacing(3)};
+`;
+
+const ItemRight = styled("div")`
+  display: flex;
+  flex-direction: column;
+  max-width: 650px;
 `;
 
 const Title = styled(Typography)`
   align-items: left;
   font-family: "Roboto Slab";
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
 `;
 
 const Content = styled("div")`
   font-family: "Roboto Slab";
+  color: ${({ theme }) => theme.palette.text.secondary};
+
   position: relative;
   max-height: calc(36px * 4);
   overflow: hidden;
+
+  width: 100%;
+
   padding-right: 1rem; /* space for ellipsis */
 
   &::before {
@@ -69,7 +103,6 @@ const Action = styled(Link)`
 
   &:hover {
     color: ${({ theme }) => theme.palette.primary.dark};
-    text-decoration: underline;
   }
 `;
 
@@ -89,12 +122,21 @@ export const ViewArticles: FunctionComponent<IViewArticlesProps> = (
     const { blocks, meta } = page;
     return (
       <StyledListItem key={slug}>
-        <Title>{(meta.properties as any).title.title[0].plain_text}</Title>
-        <Content>
-          <ParagraphBlock block={blocks.results[0] as any} />
-        </Content>
+        <ItemTop>
+          <Skeleton sx={{ width: 140, height: 200 }} animation="wave" />
+
+          <ItemRight>
+            <Title>{(meta.properties as any).title.title[0].plain_text}</Title>
+            <Content>
+              <ParagraphBlock block={blocks.results[0] as any} />
+            </Content>
+          </ItemRight>
+        </ItemTop>
+
         <Actions>
-          <Action href={`/articles/${slug}`}>Read more</Action>
+          <Button variant="outlined" size="small" sx={{ mr: 2 }}>
+            <Action href={`/articles/${slug}`}>Read more</Action>
+          </Button>
         </Actions>
       </StyledListItem>
     );
@@ -103,11 +145,11 @@ export const ViewArticles: FunctionComponent<IViewArticlesProps> = (
   return (
     <>
       <MaxWidth>
-        <List>
+        <StyledList>
           {Object.entries(blocksBySlug).map(([key, value]) =>
             renderItem(key, value)
           )}
-        </List>
+        </StyledList>
       </MaxWidth>
     </>
   );
