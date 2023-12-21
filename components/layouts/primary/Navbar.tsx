@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar, styled } from "@mui/material";
+import { AppBar, Box, Button, Icon, Toolbar, styled } from "@mui/material";
 import Link from "next/link";
 import { FunctionComponent, ReactElement } from "react";
 
@@ -18,6 +18,17 @@ const StyledToolbar = styled(Toolbar)`
 
 const StyledLink = styled(Link)`
   margin-left: 172px;
+`;
+
+const ButtonLink = styled(Link)`
+  font-family: "Roboto Slab";
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
 `;
 
 const DarkModeToggle = styled(Button)`
@@ -73,6 +84,18 @@ export const Navbar: FunctionComponent<INavbarProps> = (
             </StyledSvg>
           </StyledLink>
 
+          <Button
+            variant="contained"
+            disableElevation={true}
+            sx={{
+              zIndex: 1,
+            }}
+          >
+            <ButtonLink href="/contact">Contact us</ButtonLink>
+            <Icon sx={{ mt: -0.5, ml: 0.5 }} fontSize="small">
+              chevron_right
+            </Icon>
+          </Button>
           {/* <DarkModeToggle
             onClick={onToggleDarkMode}
             size="small"
