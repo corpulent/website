@@ -29,6 +29,10 @@ const PrimaryLinks = styled(Link)`
   }
 `;
 
+const StyledButton = styled(Button)`
+  border-radius: 0px;
+`;
+
 const ButtonLink = styled(Link)`
   font-family: "Roboto Slab";
   text-decoration: none;
@@ -44,9 +48,9 @@ export const Footer: FunctionComponent = (): ReactElement => {
   return (
     <BottomBar>
       {/* <PrimaryLinks href="/articles">Articles</PrimaryLinks> */}
-      <Button variant="contained" disableElevation={true}>
+      <StyledButton variant="contained" disableElevation={true}>
         <ButtonLink href="/contact">Contact us</ButtonLink>
-      </Button>
+      </StyledButton>
     </BottomBar>
   );
 };

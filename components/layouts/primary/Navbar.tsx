@@ -94,10 +94,11 @@ export const Navbar: FunctionComponent<INavbarProps> = (
               disableElevation={true}
               sx={{
                 zIndex: 1,
+                borderRadius: 0,
               }}
             >
               <ButtonLink href="/contact">Contact us</ButtonLink>
-              <Icon sx={{ mt: -0.5, ml: 0.5 }} fontSize="small">
+              <Icon sx={{ mt: -0.25, ml: 0.5 }} fontSize="small">
                 chevron_right
               </Icon>
             </Button>

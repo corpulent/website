@@ -64,7 +64,7 @@ export const PrimaryLayout: FunctionComponent<IPrimaryLayoutProps> = (
         <CssBaseline />
         <Navbar onToggleDarkMode={handleToggleDarkMode} darkMode={darkMode} />
         <Main>{children}</Main>
-        <Footer />
+        {/* <Footer /> */}
       </ThemeProvider>
     </Root>
   );
