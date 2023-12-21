@@ -12,10 +12,11 @@ const Root = styled("div")``;
 const Hero = styled("div")`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
 
   margin: ${({ theme }) => theme.spacing(2, 25, 0, 25)};
+  min-height: calc(100vh - 200px);
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     min-height: calc(100vh - 200px);
@@ -78,7 +79,7 @@ const DetailsContainer = styled("div")`
   justify-content: flex-start;
   row-gap: ${({ theme }) => theme.spacing(2)};
 
-  margin: ${({ theme }) => theme.spacing(10, 25, 0, 25)};
+  margin: ${({ theme }) => theme.spacing(5, 0, 0, 0)};
 
   text-align: left;
   color: ${({ theme }) => theme.palette.text.secondary};
@@ -143,23 +144,24 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
           with modern, cloud native solutions
         </HeroTitle>
         <Design />
+
+        <DetailsContainer>
+          <Details>
+            We partner with data-centric organizations to help reduce technical
+            debt, decrease cloud costs, identify technical bottlenecks, and
+            optimize operations with modern, cloud native solutions.
+          </Details>
+          <Details>
+            We are a team of data engineers, data scientists, and software
+            engineers with experience in a variety of industries including
+            healthcare, finance, and retail.
+          </Details>
+          <Details>
+            Get <PrimaryLinks href="/contact">in touch</PrimaryLinks> with us
+            today to learn how we can help.
+          </Details>
+        </DetailsContainer>
       </Hero>
-      <DetailsContainer>
-        <Details>
-          We partner with data-centric organizations to help reduce technical
-          debt, decrease cloud costs, identify technical bottlenecks, and
-          optimize operations with modern, cloud native solutions.
-        </Details>
-        <Details>
-          We are a team of data engineers, data scientists, and software
-          engineers with experience in a variety of industries including
-          healthcare, finance, and retail.
-        </Details>
-        <Details>
-          Get <PrimaryLinks href="/contact">in touch</PrimaryLinks> with us
-          today to learn how we can help.
-        </Details>
-      </DetailsContainer>
       <ViewArticlesContainer>
         <ViewArticles blocksBySlug={blocksBySlug} />
       </ViewArticlesContainer>
