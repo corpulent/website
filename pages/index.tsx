@@ -1,28 +1,21 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { PrimaryLayout } from "../components/layouts";
 import { TNextPageWithLayout } from "../types";
-import {
-  Container,
-  Typography,
-  styled,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Container, Typography, styled, useTheme } from "@mui/material";
 import { TypeAnimation } from "react-type-animation";
 import Link from "next/link";
-import Image from "next/image";
 import * as notion from "../utils/notion";
 import { ViewArticles } from "../components/common";
 
 const Root = styled("div")``;
 
-const Hero = styled(Container)`
+const Hero = styled("div")`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 300px);
-  row-gap: ${({ theme }) => theme.spacing(8)};
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  margin: ${({ theme }) => theme.spacing(2, 25, 0, 25)};
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
     min-height: calc(100vh - 200px);
@@ -42,10 +35,12 @@ const PrimaryLinks = styled(Link)`
 
 const HeroTitle = styled(Typography)`
   max-width: 1000px;
-  font-size: 36px;
+
+  font-size: 50px;
   font-weight: 600;
-  line-height: 50px;
-  text-align: center;
+  line-height: 80px;
+  text-align: left;
+  letter-spacing: 1px;
   font-family: "Roboto Slab";
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
@@ -54,8 +49,19 @@ const HeroTitle = styled(Typography)`
   }
 `;
 
+const Design = styled("div")`
+  width: 1200px;
+  min-height: 1200px;
+  border-radius: 50%;
+  background-color: #3e187a;
+  background-image: linear-gradient(316deg, #3e187a 0%, #994ecc 74%);
+  position: absolute;
+  right: -600px;
+  top: -300px;
+`;
+
 const StyledTypeAnimation = styled(TypeAnimation)`
-  font-size: 36px;
+  font-size: 50px;
   display: inline-block;
   font-family: "Roboto Slab";
   font-weight: 700;
@@ -65,23 +71,17 @@ const StyledTypeAnimation = styled(TypeAnimation)`
   }
 `;
 
-const LogoContainer = styled("div")`
-  display: flex;
-  flex-direction: row;
-  column-gap: ${({ theme }) => theme.spacing(5)};
-  justify-content: center;
-  align-items: center;
-
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    column-gap: ${({ theme }) => theme.spacing(3)};
-  }
-`;
-
-const DetailsContainer = styled(Container)`
+const DetailsContainer = styled("div")`
   display: flex;
   flex-direction: column;
-  row-gap: ${({ theme }) => theme.spacing(4)};
-  text-align: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  row-gap: ${({ theme }) => theme.spacing(2)};
+
+  margin: ${({ theme }) => theme.spacing(10, 25, 0, 25)};
+
+  text-align: left;
+  color: ${({ theme }) => theme.palette.text.secondary};
 
   ${({ theme }) => theme.breakpoints.up("xl")} {
     max-width: 800px;
@@ -93,13 +93,10 @@ const DetailsContainer = styled(Container)`
 `;
 
 const Details = styled(Typography)`
-  font-size: 18px;
-  line-height: 38px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  line-height: 36px;
   font-family: "Roboto Slab";
-
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    font-size: 20px;
-  }
 `;
 
 const ViewArticlesContainer = styled(Container)`
@@ -118,37 +115,10 @@ export interface IHomeProps {
   blocksBySlug: Record<string, any>;
 }
 
-const logos = [
-  {
-    url: "/argo-icon.svg",
-    alt: "Argo icon",
-    width: 80,
-    height: 80,
-  },
-  {
-    url: "/airflow-icon.svg",
-    alt: "Airflow icon",
-    width: 55,
-    height: 55,
-  },
-  {
-    url: "/dagster-icon.svg",
-    alt: "Dagster icon",
-    width: 100,
-    height: 100,
-  },
-  {
-    url: "/mulesoft-icon.svg",
-    alt: "Mulesoft icon",
-    width: 70,
-    height: 70,
-  },
-];
-
 const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
   const { blocksBySlug } = props;
   const theme = useTheme();
-  const largeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const [init, setInit] = useState(false);
 
   return (
     <Root>
@@ -170,29 +140,24 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
             repeat={Infinity}
           />
           <br />
-          with modern, cloud native solutions.
+          with modern, cloud native solutions
         </HeroTitle>
-        <LogoContainer>
-          {logos.map((logo) => (
-            <Image
-              key={logo.url}
-              src={logo.url}
-              alt={logo.alt}
-              width={logo.width * (largeScreen ? 0.7 : 0.6)}
-              height={logo.height * (largeScreen ? 0.7 : 0.6)}
-            />
-          ))}
-        </LogoContainer>
+        <Design />
       </Hero>
       <DetailsContainer>
         <Details>
-          We partner with data-centric organizations to help reduce technical debt, decrease cloud costs, identify technical bottlenecks, and optimize operations with modern, cloud native solutions.
+          We partner with data-centric organizations to help reduce technical
+          debt, decrease cloud costs, identify technical bottlenecks, and
+          optimize operations with modern, cloud native solutions.
         </Details>
         <Details>
-          We are a team of data engineers, data scientists, and software engineers with experience in a variety of industries including healthcare, finance, and retail.
+          We are a team of data engineers, data scientists, and software
+          engineers with experience in a variety of industries including
+          healthcare, finance, and retail.
         </Details>
         <Details>
-          Get <PrimaryLinks href="/contact">in touch</PrimaryLinks> with us today to learn how we can help.
+          Get <PrimaryLinks href="/contact">in touch</PrimaryLinks> with us
+          today to learn how we can help.
         </Details>
       </DetailsContainer>
       <ViewArticlesContainer>

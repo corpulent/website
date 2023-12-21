@@ -1,6 +1,6 @@
-import { AppBar, Box, Button, Icon, Toolbar, styled } from "@mui/material";
+import { AppBar, Box, Button, Toolbar, styled } from "@mui/material";
 import Link from "next/link";
-import { FunctionComponent, ReactElement, useCallback, useState } from "react";
+import { FunctionComponent, ReactElement } from "react";
 
 const StyledSvg = styled("svg")`
   width: 48px;
@@ -17,7 +17,7 @@ const StyledToolbar = styled(Toolbar)`
 `;
 
 const StyledLink = styled(Link)`
-  margin-left: 200px;
+  margin-left: 172px;
 `;
 
 const DarkModeToggle = styled(Button)`
