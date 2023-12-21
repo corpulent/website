@@ -162,9 +162,9 @@ const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
           </Details>
         </DetailsContainer>
       </Hero>
-      <ViewArticlesContainer>
+      {/* <ViewArticlesContainer>
         <ViewArticles blocksBySlug={blocksBySlug} />
-      </ViewArticlesContainer>
+      </ViewArticlesContainer> */}
     </Root>
   );
 };

@@ -43,7 +43,7 @@ const ButtonLink = styled(Link)`
 export const Footer: FunctionComponent = (): ReactElement => {
   return (
     <BottomBar>
-      <PrimaryLinks href="/articles">Articles</PrimaryLinks>
+      {/* <PrimaryLinks href="/articles">Articles</PrimaryLinks> */}
       <Button variant="contained" disableElevation={true}>
         <ButtonLink href="/contact">Contact us</ButtonLink>
       </Button>
