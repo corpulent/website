@@ -1,5 +1,6 @@
 import { AppBar, Box, Button, Icon, Toolbar, styled } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FunctionComponent, ReactElement } from "react";
 
 const StyledSvg = styled("svg")`
@@ -45,6 +46,9 @@ export const Navbar: FunctionComponent<INavbarProps> = (
   props: INavbarProps
 ): ReactElement => {
   const { onToggleDarkMode, darkMode } = props;
+
+  const router = useRouter();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" elevation={0} color="inherit">
@@ -84,18 +88,20 @@ export const Navbar: FunctionComponent<INavbarProps> = (
             </StyledSvg>
           </StyledLink>
 
-          <Button
-            variant="contained"
-            disableElevation={true}
-            sx={{
-              zIndex: 1,
-            }}
-          >
-            <ButtonLink href="/contact">Contact us</ButtonLink>
-            <Icon sx={{ mt: -0.5, ml: 0.5 }} fontSize="small">
-              chevron_right
-            </Icon>
-          </Button>
+          {router.pathname !== "/contact" && (
+            <Button
+              variant="contained"
+              disableElevation={true}
+              sx={{
+                zIndex: 1,
+              }}
+            >
+              <ButtonLink href="/contact">Contact us</ButtonLink>
+              <Icon sx={{ mt: -0.5, ml: 0.5 }} fontSize="small">
+                chevron_right
+              </Icon>
+            </Button>
+          )}
           {/* <DarkModeToggle
             onClick={onToggleDarkMode}
             size="small"
