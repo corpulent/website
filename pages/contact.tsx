@@ -45,7 +45,10 @@ const MessageDescription = styled(Typography)`
 
 const StyledCard = styled(Card)`
   width: 400px;
-  border: 1px solid #dfdfdf;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #dfdfdf;
+  border-radius: 0px;
 `;
 
 const StyledCardContent = styled(CardContent)`
@@ -76,6 +79,8 @@ const FormTitle = styled(Typography)`
 
 const Submit = styled(Button)`
   width: 120px;
+  border-radius: 0px;
+  background: #000;
 `;
 
 interface IEnquiryFormValues {
@@ -143,6 +148,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 helperText={formik.touched.name && formik.errors.name}
                 fullWidth={true}
                 size="small"
+                InputProps={{ sx: { borderRadius: 0 } }}
               />
               <TextField
                 id="jobTitle"
@@ -156,6 +162,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 helperText={formik.touched.jobTitle && formik.errors.jobTitle}
                 fullWidth={true}
                 size="small"
+                InputProps={{ sx: { borderRadius: 0 } }}
               />
               <TextField
                 id="company"
@@ -167,6 +174,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 helperText={formik.touched.company && formik.errors.company}
                 fullWidth={true}
                 size="small"
+                InputProps={{ sx: { borderRadius: 0 } }}
               />
               <TextField
                 id="email"
@@ -178,6 +186,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 helperText={formik.touched.email && formik.errors.email}
                 fullWidth={true}
                 size="small"
+                InputProps={{ sx: { borderRadius: 0 } }}
               />
               <TextField
                 id="message"
@@ -191,6 +200,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 multiline={true}
                 rows={4}
                 size="small"
+                InputProps={{ sx: { borderRadius: 0 } }}
               />
               <Submit
                 type="submit"
@@ -200,16 +210,16 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 disabled={createEnquiryMutation.isLoading}
                 disableElevation={true}
               >
-                Submit{" "}
+                Send{" "}
                 {createEnquiryMutation.isLoading && (
                   <CircularProgress size={14} sx={{ ml: 1 }} />
                 )}
               </Submit>
               {/* You are allowed to hide the badge as long as you include the reCAPTCHA
-                * branding visibly in the user flow.
-                *
-                * See https://stackoverflow.com/a/53749730 for more information.
-                */}
+               * branding visibly in the user flow.
+               *
+               * See https://stackoverflow.com/a/53749730 for more information.
+               */}
               <Typography sx={{ fontSize: 12, color: "grey" }}>
                 This site is protected by reCAPTCHA and the Google{" "}
                 <a
