@@ -100,8 +100,8 @@ const Details = styled(Typography)`
   font-family: "Roboto Slab";
 `;
 
-const ViewArticlesContainer = styled(Container)`
-  margin-top: ${({ theme }) => theme.spacing(16)};
+const ViewArticlesContainer = styled("div")`
+  padding: ${({ theme }) => theme.spacing(5, 0, 0, 25)};
 
   display: flex;
   flex-direction: column;
