@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactElement } from "react";
 
-import { styled } from "@mui/material";
+import { Button, styled } from "@mui/material";
 
 import Link from "next/link";
 
@@ -9,11 +9,14 @@ const BottomBar = styled("div")`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: ${({ theme }) => theme.spacing(2)};
+  padding: ${({ theme }) => theme.spacing(4, 2)};
   gap: ${({ theme }) => theme.spacing(3)};
 
-  margin-top: ${({ theme }) => theme.spacing(4)};
-  margin-bottom: ${({ theme }) => theme.spacing(4)};
+  margin: ${({ theme }) => theme.spacing(0, 4)};
+
+  border-top-width: 0.5px;
+  border-top-style: solid;
+  border-top-color: #efefef;
 `;
 
 const PrimaryLinks = styled(Link)`
@@ -23,7 +26,17 @@ const PrimaryLinks = styled(Link)`
 
   &:hover {
     color: ${({ theme }) => theme.palette.primary.dark};
-    text-decoration: underline;
+  }
+`;
+
+const ButtonLink = styled(Link)`
+  font-family: "Roboto Slab";
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    color: white;
+    text-decoration: none;
   }
 `;
 
@@ -31,7 +44,9 @@ export const Footer: FunctionComponent = (): ReactElement => {
   return (
     <BottomBar>
       <PrimaryLinks href="/articles">Articles</PrimaryLinks>
-      <PrimaryLinks href="/contact">Contact us</PrimaryLinks>
+      <Button variant="contained" disableElevation={true}>
+        <ButtonLink href="/contact">Contact us</ButtonLink>
+      </Button>
     </BottomBar>
   );
 };
