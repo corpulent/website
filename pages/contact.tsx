@@ -45,10 +45,6 @@ const MessageDescription = styled(Typography)`
 
 const StyledCard = styled(Card)`
   width: 400px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #dfdfdf;
-  border-radius: 0px;
 `;
 
 const StyledCardContent = styled(CardContent)`
