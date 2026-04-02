@@ -85,7 +85,6 @@ const Submit = styled(Button)`
 
 interface IEnquiryFormValues {
   name: string;
-  jobTitle: string;
   company: string;
   email: string;
   message: string;
@@ -93,7 +92,6 @@ interface IEnquiryFormValues {
 
 const initialValues: IEnquiryFormValues = {
   name: "",
-  jobTitle: "",
   company: "",
   email: "",
   message: "",
@@ -120,7 +118,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
         <MessageContainer>
           <MessageTitle>Thank you</MessageTitle>
           <MessageDescription>
-            We have received your message. We will be in touch soon.
+            Message received! Will be in touch soon.
           </MessageDescription>
         </MessageContainer>
       )}
@@ -128,7 +126,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
         <MessageContainer>
           <MessageTitle>Something went wrong</MessageTitle>
           <MessageDescription>
-            An error ocurred while sending your message. Please try again in
+            An error occurred while sending your message. Please try again in
             some time.
           </MessageDescription>
         </MessageContainer>
@@ -136,7 +134,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
       {(createEnquiryMutation.isIdle || createEnquiryMutation.isPending) && (
         <StyledCard elevation={0}>
           <StyledCardContent>
-            <FormTitle variant="h1">Have questions? Let us know.</FormTitle>
+            <FormTitle variant="h1">Get in touch</FormTitle>
             <Form onSubmit={formik.handleSubmit}>
               <TextField
                 id="name"
@@ -146,20 +144,6 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 onChange={formik.handleChange}
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
-                fullWidth={true}
-                size="small"
-                InputProps={{ sx: { borderRadius: 0 } }}
-              />
-              <TextField
-                id="jobTitle"
-                name="jobTitle"
-                label="Job title"
-                value={formik.values.jobTitle}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.jobTitle && Boolean(formik.errors.jobTitle)
-                }
-                helperText={formik.touched.jobTitle && formik.errors.jobTitle}
                 fullWidth={true}
                 size="small"
                 InputProps={{ sx: { borderRadius: 0 } }}

@@ -120,7 +120,6 @@ export const getPage = async (rootPageId: string, slug: string) => {
 
 export interface IEnquiry {
   name: string;
-  jobTitle: string;
   company: string;
   email: string;
   message: string;
@@ -132,7 +131,6 @@ export const createEnquiryRow = async (enquiry: IEnquiry): Promise<void> => {
       parent: { database_id: process.env.NOTION_DATABASE_ID! },
       properties: {
         Name: { title: [{ text: { content: enquiry.name } }] },
-        JobTitle: { rich_text: [{ text: { content: enquiry.jobTitle } }] },
         Company: { rich_text: [{ text: { content: enquiry.company } }] },
         Email: { rich_text: [{ text: { content: enquiry.email } }] },
         Message: { rich_text: [{ text: { content: enquiry.message } }] },

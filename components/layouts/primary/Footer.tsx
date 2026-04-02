@@ -47,7 +47,7 @@ export const Footer: FunctionComponent = (): ReactElement => {
     <BottomBar>
       {/* <PrimaryLinks href="/articles">Articles</PrimaryLinks> */}
       <StyledButton variant="contained" disableElevation={true}>
-        <ButtonLink href="/contact">Contact us</ButtonLink>
+        <ButtonLink href="/contact">Contact</ButtonLink>
       </StyledButton>
     </BottomBar>
   );

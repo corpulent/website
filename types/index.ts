@@ -10,7 +10,6 @@ export type TNextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
 
 export interface IEnquiry {
   name: string;
-  jobTitle: string;
   company: string;
   email: string;
   message: string;
