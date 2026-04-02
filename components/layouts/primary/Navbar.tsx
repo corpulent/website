@@ -1,11 +1,9 @@
 import {
   AppBar,
-  Button,
   Container,
   Icon,
   IconButton,
   Toolbar,
-  Typography,
   styled,
 } from "@mui/material";
 import Link from "next/link";
@@ -21,7 +19,7 @@ const StyledToolbar = styled(Toolbar)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 88px;
+  min-height: 112px;
   padding: ${({ theme }) => theme.spacing(0, 0.5)};
 `;
 
@@ -39,17 +37,21 @@ const BrandMark = styled("svg")`
   flex-shrink: 0;
 `;
 
-const BrandText = styled(Typography)`
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-`;
-
 const Actions = styled("div")`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(1)};
+`;
+
+const ContactLink = styled(Link)`
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: ${({ theme }) => theme.palette.text.secondary};
+
+  &:hover {
+    color: ${({ theme }) => theme.palette.text.primary};
+  }
 `;
 
 export interface INavbarProps {
@@ -101,7 +103,6 @@ export const Navbar: FunctionComponent<INavbarProps> = (
                 </linearGradient>
               </defs>
             </BrandMark>
-            <BrandText>Outermeasure</BrandText>
           </Brand>
 
           <Actions>
@@ -119,15 +120,7 @@ export const Navbar: FunctionComponent<INavbarProps> = (
             </IconButton>
 
             {router.pathname !== "/contact" && (
-              <Button
-                component={Link}
-                href="/contact"
-                variant="contained"
-                disableElevation={true}
-                endIcon={<Icon fontSize="small">north_east</Icon>}
-              >
-                Contact
-              </Button>
+              <ContactLink href="/contact">Contact us</ContactLink>
             )}
           </Actions>
         </StyledToolbar>
