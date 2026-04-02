@@ -26,6 +26,7 @@ const HeroInner = styled("section")`
 
 const HeroTitle = styled(Typography)`
   max-width: 12ch;
+  font-family: "Roboto Slab", Georgia, serif;
   font-size: clamp(3.4rem, 8vw, 6.5rem);
   font-weight: 700;
   line-height: 1;

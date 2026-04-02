@@ -20,12 +20,11 @@ const BottomBar = styled("div")`
 `;
 
 const PrimaryLinks = styled(Link)`
-  font-family: "Roboto Slab";
   text-decoration: none;
-  color: ${({ theme }) => theme.palette.primary.light};
+  color: ${({ theme }) => theme.palette.text.primary};
 
   &:hover {
-    color: ${({ theme }) => theme.palette.primary.dark};
+    color: ${({ theme }) => theme.palette.text.primary};
   }
 `;
 
@@ -34,7 +33,6 @@ const StyledButton = styled(Button)`
 `;
 
 const ButtonLink = styled(Link)`
-  font-family: "Roboto Slab";
   text-decoration: none;
   color: white;
 

@@ -57,13 +57,11 @@ const ItemRight = styled("div")`
 
 const Title = styled(Typography)`
   align-items: left;
-  font-family: "Roboto Slab";
   font-size: 20px;
   font-weight: 600;
 `;
 
 const Content = styled("div")`
-  font-family: "Roboto Slab";
   color: ${({ theme }) => theme.palette.text.secondary};
 
   position: relative;
@@ -97,12 +95,11 @@ const Actions = styled("div")`
 `;
 
 const Action = styled(Link)`
-  font-family: "Roboto Slab";
   text-decoration: none;
-  color: ${({ theme }) => theme.palette.primary.light};
+  color: ${({ theme }) => theme.palette.text.primary};
 
   &:hover {
-    color: ${({ theme }) => theme.palette.primary.dark};
+    color: ${({ theme }) => theme.palette.text.primary};
   }
 `;
 

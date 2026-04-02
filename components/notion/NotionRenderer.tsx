@@ -20,7 +20,6 @@ import {
 import { IImageBlockProps, ImageBlock } from "./ImageBlock";
 
 const Root = styled("div")`
-  font-family: "Roboto Slab";
   display: flex;
   flex-direction: column;
 

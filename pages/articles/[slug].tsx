@@ -20,7 +20,6 @@ const MaxWidth = styled("div")`
 `;
 
 const Title = styled(Typography)`
-  font-family: "Roboto Slab";
   font-size: 25px;
   font-weight: 800;
   margin-top: ${({ theme }) => theme.spacing(2)};

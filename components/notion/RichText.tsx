@@ -12,35 +12,13 @@ const Span = styled("span")`
 
 const StyledLink = styled("a")`
   text-decoration: none;
-  color: ${({ theme }) => theme.palette.primary.light};
+  color: ${({ theme }) => theme.palette.text.primary};
 
   &:hover {
-    color: ${({ theme }) => theme.palette.primary.dark};
+    color: ${({ theme }) => theme.palette.text.primary};
     text-decoration: underline;
   }
 `;
-
-const colorMapping = {
-  default: "black",
-  gray: "grey",
-  brown: "brown",
-  orange: "orange",
-  yellow: "yellow",
-  green: "green",
-  blue: "blue",
-  purple: "purple",
-  pink: "pink",
-  red: "red",
-  gray_background: "grey",
-  brown_background: "brown",
-  orange_background: "orange",
-  yellow_background: "yellow",
-  green_background: "green",
-  blue_background: "blue",
-  purple_background: "purple",
-  pink_background: "pink",
-  red_background: "red",
-};
 
 const DummyLink: FunctionComponent<LinkProps> = (
   props: LinkProps
@@ -60,8 +38,7 @@ export const RichText: FunctionComponent<IRichTextProps> = (
 ): ReactElement => {
   const { richText, index } = props;
 
-  const { bold, italic, strikethrough, underline, code, color } =
-    richText.annotations;
+  const { bold, italic, strikethrough, underline, code } = richText.annotations;
 
   const Wrapper = richText.href ? StyledLink : DummyLink;
   const Component = code ? Code : Span;
@@ -70,7 +47,6 @@ export const RichText: FunctionComponent<IRichTextProps> = (
     <Wrapper key={index} href={richText.href ?? undefined}>
       <Component
         style={{
-          fontFamily: "Roboto Slab",
           fontWeight: bold ? "bold" : "normal",
           fontStyle: italic ? "italic" : "normal",
           textDecoration: [

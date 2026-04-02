@@ -13,13 +13,15 @@ import { FunctionComponent, ReactElement } from "react";
 const Shell = styled(AppBar)`
   background: transparent;
   backdrop-filter: blur(18px);
+  padding-top: ${({ theme }) => theme.spacing(2.5)};
+  padding-bottom: ${({ theme }) => theme.spacing(1.5)};
 `;
 
 const StyledToolbar = styled(Toolbar)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 112px;
+  min-height: 124px;
   padding: ${({ theme }) => theme.spacing(0, 0.5)};
 `;
 
@@ -47,7 +49,7 @@ const ContactLink = styled(Link)`
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  color: ${({ theme }) => theme.palette.text.secondary};
+  color: ${({ theme }) => theme.palette.text.primary};
 
   &:hover {
     color: ${({ theme }) => theme.palette.text.primary};

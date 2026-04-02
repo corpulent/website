@@ -77,9 +77,8 @@ const Actions = styled("div")`
 `;
 
 const Action = styled(Link)`
-  font-family: "Roboto Slab";
   text-decoration: none;
-  color: ${({ theme }) => theme.palette.text.secondary};
+  color: ${({ theme }) => theme.palette.text.primary};
 `;
 
 export interface IViewArticlesProps {

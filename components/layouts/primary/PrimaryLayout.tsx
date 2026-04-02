@@ -24,12 +24,15 @@ export interface IPrimaryLayoutProps {
   children: ReactNode;
 }
 
+const SYSTEM_FONT_STACK =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif';
+
 const sharedTheme = {
   shape: {
     borderRadius: 20,
   },
   typography: {
-    fontFamily: '"Roboto Slab", serif',
+    fontFamily: SYSTEM_FONT_STACK,
     button: {
       textTransform: "none" as const,
       fontWeight: 600,
@@ -80,8 +83,8 @@ const darkTheme = createTheme({
       paper: "#111a2b",
     },
     text: {
-      primary: "#f8fafc",
-      secondary: "#94a3b8",
+      primary: "#ffffff",
+      secondary: "#ffffff",
     },
     divider: "rgba(148, 163, 184, 0.18)",
   },
@@ -115,8 +118,8 @@ const lightTheme = createTheme({
       paper: "rgba(255, 255, 255, 0.8)",
     },
     text: {
-      primary: "#0f172a",
-      secondary: "#475569",
+      primary: "#000000",
+      secondary: "#000000",
     },
     divider: "rgba(15, 23, 42, 0.12)",
   },
