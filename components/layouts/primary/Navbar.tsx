@@ -14,7 +14,6 @@ import { FunctionComponent, ReactElement } from "react";
 
 const Shell = styled(AppBar)`
   background: transparent;
-  border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
   backdrop-filter: blur(18px);
 `;
 
