@@ -1,14 +1,19 @@
-import CodeMirror from "@uiw/react-codemirror";
 import { FunctionComponent, ReactElement, useMemo } from "react";
-import { python } from "@codemirror/lang-python";
 import { CodeBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { styled } from "@mui/material";
-import "./CodeBlock.module.css";
-import { EditorView } from "@codemirror/view";
 
-const Root = styled("div")`
-  margin-top: ${({ theme }) => theme.spacing(1)};
-  font-size: 16px;
+const Root = styled("pre")`
+  margin-top: ${({ theme }) => theme.spacing(1.5)};
+  margin-bottom: ${({ theme }) => theme.spacing(2)};
+  padding: ${({ theme }) => theme.spacing(2.5)};
+  border: 1px solid ${({ theme }) => theme.palette.divider};
+  border-radius: ${({ theme }) => theme.spacing(2)};
+  background: ${({ theme }) => theme.palette.background.paper};
+  color: ${({ theme }) => theme.palette.text.primary};
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre-wrap;
 `;
 
 export interface ICodeBlockProps {
@@ -23,17 +28,6 @@ export const CodeBlock: FunctionComponent<ICodeBlockProps> = (
     () => block.code.rich_text.map((text) => text.plain_text).join("\n"),
     [block.code.rich_text]
   );
-  return (
-    <Root>
-      <CodeMirror
-        value={code}
-        extensions={[python(), EditorView.lineWrapping]}
-        theme="dark"
-        readOnly={true}
-        basicSetup={{
-          lineNumbers: false,
-        }}
-      />
-    </Root>
-  );
+
+  return <Root>{code}</Root>;
 };

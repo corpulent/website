@@ -1,40 +1,56 @@
-import { AppBar, Box, Button, Icon, Toolbar, styled } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Container,
+  Icon,
+  IconButton,
+  Toolbar,
+  Typography,
+  styled,
+} from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FunctionComponent, ReactElement } from "react";
 
-const StyledSvg = styled("svg")`
-  width: 48px;
-  height: 48px;
-  margin-right: ${({ theme }) => theme.spacing(1)};
-  margin-top: 24px;
+const Shell = styled(AppBar)`
+  background: transparent;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
+  backdrop-filter: blur(18px);
 `;
 
 const StyledToolbar = styled(Toolbar)`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  min-height: 88px;
+  padding: ${({ theme }) => theme.spacing(0, 0.5)};
 `;
 
-const StyledLink = styled(Link)`
-  margin-left: 172px;
-`;
-
-const ButtonLink = styled(Link)`
-  font-family: "Roboto Slab";
+const Brand = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(1.5)};
   text-decoration: none;
-  color: white;
-
-  &:hover {
-    text-decoration: none;
-    color: white;
-  }
+  color: inherit;
 `;
 
-const DarkModeToggle = styled(Button)`
-  border-radius: ${({ theme }) => theme.spacing(1)};
-  width: 40px;
+const BrandMark = styled("svg")`
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+`;
+
+const BrandText = styled(Typography)`
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+`;
+
+const Actions = styled("div")`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(1)};
 `;
 
 export interface INavbarProps {
@@ -50,11 +66,11 @@ export const Navbar: FunctionComponent<INavbarProps> = (
   const router = useRouter();
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" elevation={0} color="inherit">
+    <Shell position="sticky" elevation={0} color="inherit">
+      <Container maxWidth="lg">
         <StyledToolbar>
-          <StyledLink href="/">
-            <StyledSvg
+          <Brand href="/">
+            <BrandMark
               width="220"
               height="220"
               viewBox="0 0 220 220"
@@ -85,32 +101,38 @@ export const Navbar: FunctionComponent<INavbarProps> = (
                   <stop offset="1" stopColor="#00E0FF" stopOpacity="0" />
                 </linearGradient>
               </defs>
-            </StyledSvg>
-          </StyledLink>
+            </BrandMark>
+            <BrandText>Outermeasure</BrandText>
+          </Brand>
 
-          {router.pathname !== "/contact" && (
-            <Button
-              variant="contained"
-              disableElevation={true}
-              sx={{
-                zIndex: 1,
-                borderRadius: 0,
-              }}
+          <Actions>
+            <IconButton
+              onClick={onToggleDarkMode}
+              size="small"
+              color="inherit"
+              aria-label={
+                darkMode ? "Switch to light mode" : "Switch to dark mode"
+              }
             >
-              <ButtonLink href="/contact">Contact us</ButtonLink>
-              <Icon sx={{ mt: -0.25, ml: 0.5 }} fontSize="small">
-                chevron_right
+              <Icon fontSize="small">
+                {darkMode ? "light_mode" : "dark_mode"}
               </Icon>
-            </Button>
-          )}
-          {/* <DarkModeToggle
-            onClick={onToggleDarkMode}
-            size="small"
-          >
-            <Icon>{darkMode ? "light_mode" : "dark_mode"}</Icon>
-          </DarkModeToggle> */}
+            </IconButton>
+
+            {router.pathname !== "/contact" && (
+              <Button
+                component={Link}
+                href="/contact"
+                variant="contained"
+                disableElevation={true}
+                endIcon={<Icon fontSize="small">north_east</Icon>}
+              >
+                Contact
+              </Button>
+            )}
+          </Actions>
         </StyledToolbar>
-      </AppBar>
-    </Box>
+      </Container>
+    </Shell>
   );
 };

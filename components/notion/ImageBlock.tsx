@@ -26,19 +26,19 @@ export const ImageBlock: FunctionComponent<IImageBlockProps> = (
   props: IImageBlockProps
 ): ReactElement => {
   const { block } = props;
+  const caption = (block.image as any).caption
+    .map((item: any) => item.plain_text)
+    .join("");
+
   return (
     <Root>
-      {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
       <StyledImage
         src={
           (block.image as any).file?.url ?? (block.image as any).external?.url
         }
+        alt={caption || "Article image"}
       />
-      <figcaption>
-        {(block.image as any).caption
-          .map((item: any) => item.plain_text)
-          .join("")}
-      </figcaption>
+      <figcaption>{caption}</figcaption>
     </Root>
   );
 };

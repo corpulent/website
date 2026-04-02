@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { useFormik } from "formik";
 import {
   Button,
@@ -17,9 +17,11 @@ import Recaptcha from "../components/common/Recaptcha";
 
 const Root = styled(Container)`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  min-height: calc(100vh - 120px);
+  padding-top: ${({ theme }) => theme.spacing(6)};
+  padding-bottom: ${({ theme }) => theme.spacing(6)};
 `;
 
 const MessageContainer = styled("div")`
@@ -44,7 +46,10 @@ const MessageDescription = styled(Typography)`
 `;
 
 const StyledCard = styled(Card)`
-  width: 400px;
+  width: min(100%, 560px);
+  border-color: ${({ theme }) => theme.palette.divider};
+  background: ${({ theme }) => theme.palette.background.paper};
+  backdrop-filter: blur(14px);
 `;
 
 const StyledCardContent = styled(CardContent)`
@@ -52,6 +57,7 @@ const StyledCardContent = styled(CardContent)`
   flex-direction: column;
   align-items: flex-start;
   padding: ${({ theme }) => theme.spacing(4)};
+  gap: ${({ theme }) => theme.spacing(1)};
 `;
 
 const Form = styled("form")`
@@ -68,15 +74,13 @@ const Form = styled("form")`
 `;
 
 const FormTitle = styled(Typography)`
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
   text-align: left;
 `;
 
 const Submit = styled(Button)`
-  width: 120px;
-  border-radius: 0px;
-  background: #000;
+  min-width: 140px;
 `;
 
 interface IEnquiryFormValues {
@@ -129,10 +133,10 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
           </MessageDescription>
         </MessageContainer>
       )}
-      {(createEnquiryMutation.isIdle || createEnquiryMutation.isLoading) && (
+      {(createEnquiryMutation.isIdle || createEnquiryMutation.isPending) && (
         <StyledCard elevation={0}>
           <StyledCardContent>
-            <FormTitle variant="h1">Have questions? Let us know</FormTitle>
+            <FormTitle variant="h1">Have questions? Let us know.</FormTitle>
             <Form onSubmit={formik.handleSubmit}>
               <TextField
                 id="name"
@@ -203,11 +207,11 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 variant="contained"
                 color="primary"
                 size="small"
-                disabled={createEnquiryMutation.isLoading}
+                disabled={createEnquiryMutation.isPending}
                 disableElevation={true}
               >
                 Send{" "}
-                {createEnquiryMutation.isLoading && (
+                {createEnquiryMutation.isPending && (
                   <CircularProgress size={14} sx={{ ml: 1 }} />
                 )}
               </Submit>
@@ -216,10 +220,12 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                *
                * See https://stackoverflow.com/a/53749730 for more information.
                */}
-              <Typography sx={{ fontSize: 12, color: "grey" }}>
+              <Typography
+                sx={{ fontSize: 12, color: "text.secondary", lineHeight: 1.7 }}
+              >
                 This site is protected by reCAPTCHA and the Google{" "}
                 <a
-                  style={{ color: "grey" }}
+                  style={{ color: "inherit" }}
                   href="https://policies.google.com/privacy"
                 >
                   Privacy Policy
@@ -227,7 +233,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 and{" "}
                 <a
                   href="https://policies.google.com/terms"
-                  style={{ color: "grey" }}
+                  style={{ color: "inherit" }}
                 >
                   Terms of Service
                 </a>{" "}

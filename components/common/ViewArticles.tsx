@@ -26,7 +26,7 @@ const StyledList = styled(List)`
 const StyledListItem = styled(ListItem)`
   border-bottom-width: 0.5px;
   border-bottom-style: solid;
-  border-bottom-color: #efefef;
+  border-bottom-color: ${({ theme }) => theme.palette.divider};
   padding: 0;
 
   display: flex;
@@ -86,7 +86,7 @@ const Content = styled("div")`
     inset-inline-end: 0; /* "right" */
     width: 1rem;
     height: 1rem;
-    background: white;
+    background: ${({ theme }) => theme.palette.background.default};
   }
 `;
 

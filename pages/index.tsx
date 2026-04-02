@@ -1,185 +1,136 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
+import { Button, Container, Typography, styled } from "@mui/material";
+import Link from "next/link";
 import { PrimaryLayout } from "../components/layouts";
 import { TNextPageWithLayout } from "../types";
-import { Container, Typography, styled, useTheme } from "@mui/material";
-import { TypeAnimation } from "react-type-animation";
-import Link from "next/link";
-import * as notion from "../utils/notion";
-import { ViewArticles } from "../components/common";
 
-const Root = styled("div")``;
-
-const Hero = styled("div")`
+const Hero = styled(Container)`
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-
-  margin: ${({ theme }) => theme.spacing(2, 25, 0, 25)};
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 120px);
+  padding-top: ${({ theme }) => theme.spacing(10)};
+  padding-bottom: ${({ theme }) => theme.spacing(10)};
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
-    min-height: calc(100vh - 200px);
+    min-height: calc(100vh - 96px);
+    padding-top: ${({ theme }) => theme.spacing(7)};
+    padding-bottom: ${({ theme }) => theme.spacing(7)};
   }
 `;
 
-const PrimaryLinks = styled(Link)`
-  font-family: "Roboto Slab";
-  text-decoration: none;
-  color: ${({ theme }) => theme.palette.primary.light};
+const HeroInner = styled("section")`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing(3)};
+  max-width: 760px;
+`;
 
-  &:hover {
-    color: ${({ theme }) => theme.palette.primary.dark};
-    text-decoration: underline;
-  }
+const Eyebrow = styled(Typography)`
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.palette.text.secondary};
 `;
 
 const HeroTitle = styled(Typography)`
-  max-width: 1000px;
-
-  font-size: 50px;
-  font-weight: 600;
-  line-height: 80px;
-  text-align: left;
-  letter-spacing: 1px;
-  font-family: "Roboto Slab";
-
-  ${({ theme }) => theme.breakpoints.down("sm")} {
-    font-size: 28px;
-    line-height: 42px;
-  }
-`;
-
-const Design = styled("div")`
-  width: 1200px;
-  min-height: 1200px;
-  border-radius: 50%;
-  background-color: #3e187a;
-  background-image: linear-gradient(316deg, #3e187a 0%, #994ecc 74%);
-  position: absolute;
-  right: -600px;
-  top: -300px;
-`;
-
-const StyledTypeAnimation = styled(TypeAnimation)`
-  font-size: 50px;
-  display: inline-block;
-  font-family: "Roboto Slab";
+  max-width: 12ch;
+  font-size: clamp(3.4rem, 8vw, 6.5rem);
   font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
 
   ${({ theme }) => theme.breakpoints.down("sm")} {
-    font-size: 28px;
+    max-width: 11ch;
   }
 `;
 
-const DetailsContainer = styled("div")`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  row-gap: ${({ theme }) => theme.spacing(2)};
-
-  margin: ${({ theme }) => theme.spacing(5, 0, 0, 0)};
-
-  text-align: left;
-  color: ${({ theme }) => theme.palette.text.secondary};
-
-  ${({ theme }) => theme.breakpoints.up("xl")} {
-    max-width: 800px;
-  }
-
-  ${({ theme }) => theme.breakpoints.up("lg")} {
-    max-width: 800px;
-  }
+const Accent = styled("span")`
+  color: ${({ theme }) => theme.palette.primary.light};
 `;
 
 const Details = styled(Typography)`
-  font-size: 20px;
-  letter-spacing: 1px;
-  line-height: 36px;
-  font-family: "Roboto Slab";
+  max-width: 56ch;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: ${({ theme }) => theme.palette.text.secondary};
 `;
 
-const ViewArticlesContainer = styled("div")`
-  padding: ${({ theme }) => theme.spacing(5, 0, 0, 25)};
+const FocusChip = styled("div")`
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(1.25)};
+  padding: ${({ theme }) => theme.spacing(1.1, 1.6)};
+  border: 1px solid ${({ theme }) => theme.palette.divider};
+  border-radius: 999px;
+  color: ${({ theme }) => theme.palette.text.secondary};
+  background: ${({ theme }) => theme.palette.background.paper};
+`;
 
+const FocusDot = styled("span")`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.palette.primary.main};
+  box-shadow: 0 0 0 6px rgba(125, 211, 252, 0.12);
+`;
+
+const Actions = styled("div")`
   display: flex;
-  flex-direction: column;
-  row-gap: ${({ theme }) => theme.spacing(4)};
-
-  ${({ theme }) => theme.breakpoints.up("xl")} {
-    max-width: 1000px;
-  }
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing(1.5)};
 `;
 
-export interface IHomeProps {
-  blocksBySlug: Record<string, any>;
-}
+const TextLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: ${({ theme }) => theme.palette.text.primary};
+`;
 
-const Home: TNextPageWithLayout<IHomeProps> = (props: IHomeProps) => {
-  const { blocksBySlug } = props;
-  const theme = useTheme();
-  const [init, setInit] = useState(false);
-
+const Home: TNextPageWithLayout = () => {
   return (
-    <Root>
-      <Hero>
+    <Hero maxWidth="lg">
+      <HeroInner>
+        <Eyebrow>Cloud-native data systems</Eyebrow>
         <HeroTitle variant="h1">
-          We help data-centric organizations <br />
-          <StyledTypeAnimation
-            sequence={[
-              "reduce technical debt",
-              5000,
-              "optimize operations",
-              5000,
-              "reduce cloud costs",
-              5000,
-            ]}
-            speed={89}
-            wrapper="span"
-            cursor={true}
-            repeat={Infinity}
-          />
-          <br />
-          with modern, cloud native solutions
+          We help data teams <Accent>reduce technical debt.</Accent>
         </HeroTitle>
-        <Design />
-
-        <DetailsContainer>
-          <Details>
-            We partner with data-centric organizations to help reduce technical
-            debt, decrease cloud costs, identify technical bottlenecks, and
-            optimize operations with modern, cloud native solutions.
-          </Details>
-          <Details>
-            We are a team of data engineers, data scientists, and software
-            engineers with experience in a variety of industries including
-            healthcare, finance, and retail.
-          </Details>
-          <Details>
-            Get <PrimaryLinks href="/contact">in touch</PrimaryLinks> with us
-            today to learn how we can help.
-          </Details>
-        </DetailsContainer>
-      </Hero>
-      {/* <ViewArticlesContainer>
-        <ViewArticles blocksBySlug={blocksBySlug} />
-      </ViewArticlesContainer> */}
-    </Root>
+        <Details>
+          Outermeasure partners with data-centric organizations to modernize the
+          systems behind analytics, operations, and platform delivery without
+          the noise of an over-designed marketing site.
+        </Details>
+        <FocusChip>
+          <FocusDot />
+          Current focus: reduce technical debt
+        </FocusChip>
+        <Actions>
+          <Button
+            component={Link}
+            href="/contact"
+            variant="contained"
+            disableElevation={true}
+          >
+            Start a conversation
+          </Button>
+          <TextLink href="/articles">Browse articles</TextLink>
+        </Actions>
+        <Details>
+          The next pass can go further into a full rewrite. For now, the site is
+          stripped back, dark-mode ready, and centered on a single clear
+          message.
+        </Details>
+      </HeroInner>
+    </Hero>
   );
 };
 
 Home.getLayout = (children: ReactElement): ReactElement => {
   return <PrimaryLayout>{children}</PrimaryLayout>;
 };
-
-export async function getStaticProps(context: any) {
-  const blocksBySlug = await notion.getAllPages(process.env.ROOT_PAGE_ID!);
-  return {
-    props: {
-      blocksBySlug,
-    },
-  };
-}
 
 export default Home;

@@ -23,7 +23,7 @@ const MaxWidth = styled("div")`
 const StyledListItem = styled(ListItem)`
   border-bottom-width: 0.5px;
   border-bottom-style: solid;
-  border-bottom-color: #dadada;
+  border-bottom-color: ${({ theme }) => theme.palette.divider};
   height: 256px;
 
   display: flex;
@@ -65,7 +65,7 @@ const Content = styled("div")`
     inset-inline-end: 0; /* "right" */
     width: 1rem;
     height: 1rem;
-    background: white;
+    background: ${({ theme }) => theme.palette.background.default};
   }
 `;
 
@@ -79,7 +79,7 @@ const Actions = styled("div")`
 const Action = styled(Link)`
   font-family: "Roboto Slab";
   text-decoration: none;
-  color: #aaaaaa;
+  color: ${({ theme }) => theme.palette.text.secondary};
 `;
 
 export interface IViewArticlesProps {
