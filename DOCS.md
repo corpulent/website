@@ -113,10 +113,6 @@ them in Discovery, creates a baseline source config, and preloads the two demo
 cases above. Use `Clear demo data` in `Discovery` to remove the packaged demo
 objects again.
 
-For the public documentation and reviewer walkthrough, see:
-
-- [https://www.outermeasure.com/risklens/docs](https://www.outermeasure.com/risklens/docs)
-
 ## Running analysis from SQL
 
 All analysis procedures are callable directly from a Snowflake worksheet, notebook, or any orchestration tool. Replace `"<app_name>"` with the installed application name.
