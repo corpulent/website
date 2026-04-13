@@ -8,6 +8,11 @@ const nextConfig = {
         destination: "/privacy",
         permanent: true,
       },
+      {
+        source: "/risklens",
+        destination: "/risklens/docs",
+        permanent: false,
+      },
     ];
   },
 };
