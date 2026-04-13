@@ -2,10 +2,7 @@ import { ReactElement } from "react";
 
 import type { AppProps } from "next/app";
 
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { TGetLayoutFunction, TNextPageWithLayout } from "../types";
 import Script from "next/script";
@@ -47,16 +44,27 @@ const CustomApp = (props: TCustomAppProps): ReactElement => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Data Systems, Smarter Analysis"
+          content="Outermeasure researches, designs, and implements custom analytical data solutions, working with organizations to turn complex data into reliable, decision-ready systems."
         />
-        <meta property="og:title" content="OuterMeasure" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:site_name" content="Outermeasure" />
+        <meta property="og:title" content="Outermeasure" />
         <meta
           property="og:description"
-          content="Data Systems, Smarter Analysis"
+          content="Custom analytical data solutions for organizations that need clear, reliable insight from complex data."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://outermeasure.com/" />
-        <meta property="og:image" content="/logo-dark.svg" />
+
+        {/* Twitter / X */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Outermeasure" />
+        <meta
+          name="twitter:description"
+          content="Custom analytical data solutions for organizations that need clear, reliable insight from complex data."
+        />
       </Head>
 
       <QueryClientProvider client={queryClient}>
