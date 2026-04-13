@@ -11,16 +11,6 @@ RiskLens supports analysis at either the individual or account level, depending 
 - Evaluates churn risk for a person or account entity.
 - Explains what changed, why risk increased, and what to investigate next.
 
-## Documentation
-
-Public documentation for RiskLens lives at:
-
-- [https://www.outermeasure.com/risklens/docs](https://www.outermeasure.com/risklens/docs)
-
-If you are reviewing the app for Marketplace approval, use the built-in demo
-workflow below and the public docs page above for the latest setup and
-walkthrough guidance.
-
 ## Installation and required grants
 
 Replace `"<app_name>"` below with the installed application name shown in Snowsight.
