@@ -14,15 +14,15 @@ import { FunctionComponent, ReactElement } from "react";
 const Shell = styled(AppBar)`
   background: transparent;
   backdrop-filter: blur(18px);
-  padding-top: ${({ theme }) => theme.spacing(2.5)};
-  padding-bottom: ${({ theme }) => theme.spacing(1.5)};
+  padding-top: ${({ theme }) => theme.spacing(1)};
+  padding-bottom: ${({ theme }) => theme.spacing(1)};
 `;
 
 const StyledToolbar = styled(Toolbar)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 124px;
+  min-height: 72px;
   padding: ${({ theme }) => theme.spacing(0, 0.5)};
 `;
 
@@ -34,17 +34,21 @@ const Brand = styled(Link)`
   color: inherit;
 `;
 
-const Actions = styled("div")`
+const Nav = styled("nav")`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing(1)};
+  gap: ${({ theme }) => theme.spacing(0.5)};
 `;
 
-const ContactLink = styled(Link)`
-  font-size: 0.95rem;
-  font-weight: 600;
+const NavLink = styled(Link)`
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   text-decoration: none;
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.secondary};
+  padding: ${({ theme }) => theme.spacing(0.75, 1.5)};
+  border-radius: ${({ theme }) => theme.spacing(1)};
+  transition: color 0.15s;
 
   &:hover {
     color: ${({ theme }) => theme.palette.text.primary};
@@ -57,7 +61,7 @@ export interface INavbarProps {
 }
 
 export const Navbar: FunctionComponent<INavbarProps> = (
-  props: INavbarProps
+  props: INavbarProps,
 ): ReactElement => {
   const { onToggleDarkMode, darkMode } = props;
 
@@ -66,7 +70,7 @@ export const Navbar: FunctionComponent<INavbarProps> = (
   return (
     <Shell position="sticky" elevation={0} color="inherit">
       <Container maxWidth="lg">
-        <StyledToolbar>
+        <StyledToolbar disableGutters>
           <Brand href="/">
             <Image
               src={darkMode ? "/logo-white.svg" : "/logo-dark.svg"}
@@ -74,11 +78,12 @@ export const Navbar: FunctionComponent<INavbarProps> = (
               width={106}
               height={119}
               priority={true}
-              style={{ width: "auto", height: 34 }}
+              style={{ width: "auto", height: 30 }}
             />
           </Brand>
 
-          <Actions>
+          <Nav>
+            <NavLink href="/contact">Contact</NavLink>
             <IconButton
               onClick={onToggleDarkMode}
               size="small"
@@ -91,7 +96,7 @@ export const Navbar: FunctionComponent<INavbarProps> = (
                 {darkMode ? "light_mode" : "dark_mode"}
               </Icon>
             </IconButton>
-          </Actions>
+          </Nav>
         </StyledToolbar>
       </Container>
     </Shell>

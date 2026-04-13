@@ -2,8 +2,6 @@ import { ReactElement } from "react";
 import { useFormik } from "formik";
 import {
   Button,
-  Card,
-  CardContent,
   CircularProgress,
   Container,
   TextField,
@@ -16,72 +14,97 @@ import { TNextPageWithLayout } from "../types";
 import Recaptcha from "../components/common/Recaptcha";
 
 const Root = styled(Container)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 120px);
-  padding-top: ${({ theme }) => theme.spacing(6)};
-  padding-bottom: ${({ theme }) => theme.spacing(6)};
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.spacing(10)};
+  padding-top: ${({ theme }) => theme.spacing(14)};
+  padding-bottom: ${({ theme }) => theme.spacing(16)};
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing(6)};
+    padding-top: ${({ theme }) => theme.spacing(9)};
+  }
 `;
 
-const MessageContainer = styled("div")`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 200px);
-`;
-
-const MessageTitle = styled(Typography)`
-  font-size: 30px;
-  font-weight: 800;
-  text-align: center;
-`;
-
-const MessageDescription = styled(Typography)`
-  font-size: 24px;
-  max-width: 600px;
-  text-align: center;
-  margin-top: ${({ theme }) => theme.spacing(2)};
-`;
-
-const StyledCard = styled(Card)`
-  width: min(100%, 560px);
-  border-color: ${({ theme }) => theme.palette.divider};
-  background: ${({ theme }) => theme.palette.background.paper};
-  backdrop-filter: blur(14px);
-`;
-
-const StyledCardContent = styled(CardContent)`
+const LeftCol = styled("div")`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: ${({ theme }) => theme.spacing(4)};
-  gap: ${({ theme }) => theme.spacing(1)};
+  gap: ${({ theme }) => theme.spacing(3)};
+  max-width: 440px;
+`;
+
+const PageEyebrow = styled(Typography)`
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.palette.primary.main};
+` as typeof Typography;
+
+const PageTitle = styled(Typography)`
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0em;
+` as typeof Typography;
+
+const PageLead = styled(Typography)`
+  font-size: 1rem;
+  line-height: 1.9;
+  color: ${({ theme }) => theme.palette.text.secondary};
+` as typeof Typography;
+
+const Detail = styled(Typography)`
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: ${({ theme }) => theme.palette.text.secondary};
+` as typeof Typography;
+
+const RightCol = styled("div")`
+  display: flex;
+  flex-direction: column;
+  padding-top: ${({ theme }) => theme.spacing(1)};
 `;
 
 const Form = styled("form")`
   display: flex;
   flex-direction: column;
-  align-items: end;
-  width: 100%;
-  margin-top: ${({ theme }) => theme.spacing(3)};
-  row-gap: ${({ theme }) => theme.spacing(2)};
-
-  ${({ theme }) => theme.breakpoints.down("md")} {
-    width: 100%;
-  }
-`;
-
-const FormTitle = styled(Typography)`
-  font-size: 32px;
-  font-weight: 600;
-  text-align: left;
+  gap: ${({ theme }) => theme.spacing(2.5)};
 `;
 
 const Submit = styled(Button)`
+  align-self: flex-end;
   min-width: 140px;
+  border-radius: 0;
+  padding: ${({ theme }) => theme.spacing(1.2, 3.5)};
 `;
+
+const MessageContainer = styled("div")`
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+  gap: ${({ theme }) => theme.spacing(2)};
+`;
+
+const MessageTitle = styled(Typography)`
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+` as typeof Typography;
+
+const MessageDescription = styled(Typography)`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.palette.text.secondary};
+  max-width: 480px;
+  text-align: center;
+  line-height: 1.9;
+` as typeof Typography;
 
 interface IEnquiryFormValues {
   name: string;
@@ -106,35 +129,66 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
 
   const formik = useFormik({
     initialValues,
+    validate: (values) => {
+      const errors: Partial<IEnquiryFormValues> = {};
+      if (!values.name.trim()) errors.name = "Name is required.";
+      if (!values.email.trim()) {
+        errors.email = "Email is required.";
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+      ) {
+        errors.email = "Please enter a valid email address.";
+      }
+      if (!values.message.trim()) errors.message = "Message is required.";
+      return errors;
+    },
     onSubmit: handleSubmit,
   });
 
   useRecaptcha(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, "contact");
 
   return (
-    <Root>
+    <Root maxWidth="lg">
       <Recaptcha />
-      {createEnquiryMutation.isSuccess && (
+
+      {(createEnquiryMutation.isSuccess || createEnquiryMutation.isError) && (
         <MessageContainer>
-          <MessageTitle>Thank you</MessageTitle>
-          <MessageDescription>
-            Message received! Will be in touch soon.
-          </MessageDescription>
+          {createEnquiryMutation.isSuccess ? (
+            <>
+              <MessageTitle variant="h1">Thank you</MessageTitle>
+              <MessageDescription>
+                Message received. We will be in touch shortly.
+              </MessageDescription>
+            </>
+          ) : (
+            <>
+              <MessageTitle variant="h1">Something went wrong</MessageTitle>
+              <MessageDescription>
+                An error occurred while sending your message. Please try again.
+              </MessageDescription>
+            </>
+          )}
         </MessageContainer>
       )}
-      {createEnquiryMutation.isError && (
-        <MessageContainer>
-          <MessageTitle>Something went wrong</MessageTitle>
-          <MessageDescription>
-            An error occurred while sending your message. Please try again in
-            some time.
-          </MessageDescription>
-        </MessageContainer>
-      )}
+
       {(createEnquiryMutation.isIdle || createEnquiryMutation.isPending) && (
-        <StyledCard elevation={0}>
-          <StyledCardContent>
-            <FormTitle variant="h1">Get in touch</FormTitle>
+        <>
+          <LeftCol>
+            <PageTitle variant="h1">Get in touch.</PageTitle>
+            <PageLead>
+              Whether you are looking to build a new analytical infrastructure,
+              make sense of existing systems, or simply explore what&apos;s
+              possible, we are happy to start with a conversation.
+            </PageLead>
+            <Detail>
+              We work with organizations of all sizes. Engagements range from
+              focused strategy sessions to long-term implementation
+              partnerships. There is no commitment required to get in touch.
+            </Detail>
+            <Detail>We usually respond within one business day.</Detail>
+          </LeftCol>
+
+          <RightCol>
             <Form onSubmit={formik.handleSubmit}>
               <TextField
                 id="name"
@@ -163,7 +217,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
               <TextField
                 id="email"
                 name="email"
-                label="Work email"
+                label="Email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 error={formik.touched.email && Boolean(formik.errors.email)}
@@ -182,7 +236,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 helperText={formik.touched.message && formik.errors.message}
                 fullWidth={true}
                 multiline={true}
-                rows={4}
+                rows={5}
                 size="small"
                 InputProps={{ sx: { borderRadius: 0 } }}
               />
@@ -190,7 +244,7 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 type="submit"
                 variant="contained"
                 color="primary"
-                size="small"
+                size="medium"
                 disabled={createEnquiryMutation.isPending}
                 disableElevation={true}
               >
@@ -199,11 +253,6 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                   <CircularProgress size={14} sx={{ ml: 1 }} />
                 )}
               </Submit>
-              {/* You are allowed to hide the badge as long as you include the reCAPTCHA
-               * branding visibly in the user flow.
-               *
-               * See https://stackoverflow.com/a/53749730 for more information.
-               */}
               <Typography
                 sx={{ fontSize: 12, color: "text.secondary", lineHeight: 1.7 }}
               >
@@ -224,8 +273,8 @@ const EnquiryForm: TNextPageWithLayout = (): ReactElement => {
                 apply.
               </Typography>
             </Form>
-          </StyledCardContent>
-        </StyledCard>
+          </RightCol>
+        </>
       )}
     </Root>
   );

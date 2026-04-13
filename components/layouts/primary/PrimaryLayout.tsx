@@ -9,6 +9,7 @@ import {
 import { CssBaseline, ThemeProvider, createTheme, styled } from "@mui/material";
 
 import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 
 const Root = styled("div")`
   display: flex;
@@ -24,15 +25,15 @@ export interface IPrimaryLayoutProps {
   children: ReactNode;
 }
 
-const SYSTEM_FONT_STACK =
-  '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif';
+const BODY_FONT =
+  '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
 const sharedTheme = {
   shape: {
     borderRadius: 20,
   },
   typography: {
-    fontFamily: SYSTEM_FONT_STACK,
+    fontFamily: BODY_FONT,
     button: {
       textTransform: "none" as const,
       fontWeight: 600,
@@ -83,10 +84,10 @@ const darkTheme = createTheme({
       paper: "#111a2b",
     },
     text: {
-      primary: "#ffffff",
-      secondary: "#ffffff",
+      primary: "#e2e8f0",
+      secondary: "#94a3b8",
     },
-    divider: "rgba(148, 163, 184, 0.18)",
+    divider: "rgba(148, 163, 184, 0.15)",
   },
   components: {
     ...sharedTheme.components,
@@ -109,19 +110,19 @@ const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#0f172a",
-      light: "#1e293b",
-      dark: "#020617",
+      main: "#1d4ed8",
+      light: "#2563eb",
+      dark: "#1e40af",
     },
     background: {
-      default: "#f4f7fb",
-      paper: "rgba(255, 255, 255, 0.8)",
+      default: "#f7f8fc",
+      paper: "rgba(255, 255, 255, 0.9)",
     },
     text: {
-      primary: "#000000",
-      secondary: "#000000",
+      primary: "#0f172a",
+      secondary: "#475569",
     },
-    divider: "rgba(15, 23, 42, 0.12)",
+    divider: "rgba(15, 23, 42, 0.1)",
   },
   components: {
     ...sharedTheme.components,
@@ -129,9 +130,9 @@ const lightTheme = createTheme({
       styleOverrides: {
         ...sharedTheme.components.MuiCssBaseline.styleOverrides,
         body: {
-          backgroundColor: "#f4f7fb",
+          backgroundColor: "#f7f8fc",
           backgroundImage:
-            "radial-gradient(circle at top, rgba(15, 23, 42, 0.08), transparent 36%)",
+            "radial-gradient(ellipse at top, rgba(29, 78, 216, 0.05), transparent 50%)",
           backgroundAttachment: "fixed",
         },
       },
@@ -153,7 +154,7 @@ const getInitialDarkMode = () => {
 };
 
 export const PrimaryLayout: FunctionComponent<IPrimaryLayoutProps> = (
-  props: IPrimaryLayoutProps
+  props: IPrimaryLayoutProps,
 ): ReactElement => {
   const { children } = props;
 
@@ -173,6 +174,7 @@ export const PrimaryLayout: FunctionComponent<IPrimaryLayoutProps> = (
         <CssBaseline />
         <Navbar onToggleDarkMode={handleToggleDarkMode} darkMode={darkMode} />
         <Main>{children}</Main>
+        <Footer />
       </ThemeProvider>
     </Root>
   );

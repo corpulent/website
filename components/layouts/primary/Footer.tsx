@@ -1,54 +1,57 @@
 import { FunctionComponent, ReactElement } from "react";
 
-import { Button, styled } from "@mui/material";
+import { Container, Typography, styled } from "@mui/material";
 
 import Link from "next/link";
 
-const BottomBar = styled("div")`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing(4, 2)};
-  gap: ${({ theme }) => theme.spacing(3)};
-
-  margin: ${({ theme }) => theme.spacing(0, 4)};
-
-  border-top-width: 0.5px;
-  border-top-style: solid;
-  border-top-color: #efefef;
+const BottomBar = styled("footer")`
+  border-top: 1px solid ${({ theme }) => theme.palette.divider};
+  padding: ${({ theme }) => theme.spacing(5, 0)};
+  margin-top: auto;
 `;
 
-const PrimaryLinks = styled(Link)`
+const FooterInner = styled(Container)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing(3)};
+  flex-wrap: wrap;
+`;
+
+const FooterCopy = styled(Typography)`
+  font-size: 0.82rem;
+  color: ${({ theme }) => theme.palette.text.secondary};
+` as typeof Typography;
+
+const FooterNav = styled("nav")`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing(3)};
+`;
+
+const FooterLink = styled(Link)`
+  font-size: 0.82rem;
+  color: ${({ theme }) => theme.palette.text.secondary};
   text-decoration: none;
-  color: ${({ theme }) => theme.palette.text.primary};
 
   &:hover {
     color: ${({ theme }) => theme.palette.text.primary};
   }
 `;
 
-const StyledButton = styled(Button)`
-  border-radius: 0px;
-`;
-
-const ButtonLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-
-  &:hover {
-    color: white;
-    text-decoration: none;
-  }
-`;
-
 export const Footer: FunctionComponent = (): ReactElement => {
+  const year = new Date().getFullYear();
+
   return (
     <BottomBar>
-      {/* <PrimaryLinks href="/articles">Articles</PrimaryLinks> */}
-      <StyledButton variant="contained" disableElevation={true}>
-        <ButtonLink href="/contact">Contact</ButtonLink>
-      </StyledButton>
+      <FooterInner maxWidth="lg">
+        <FooterCopy>
+          &copy; {year} Outermeasure. All rights reserved.
+        </FooterCopy>
+        <FooterNav>
+          <FooterLink href="/contact">Contact</FooterLink>
+          <FooterLink href="/privacy">Privacy</FooterLink>
+        </FooterNav>
+      </FooterInner>
     </BottomBar>
   );
 };
