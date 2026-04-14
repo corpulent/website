@@ -1,8 +1,8 @@
-# RiskLens Native App
+# RiskLens Explainable Churn Intelligence
 
-RiskLens is a Snowflake Native App for explainable churn intelligence. It turns raw business tables into account health assessments, churn risk signals, and supporting evidence.
+RiskLens is a Snowflake Native App for explainable churn intelligence. It helps teams turn customer, product, support, and billing tables into account health assessments, churn risk signals, and supporting evidence directly inside Snowflake.
 
-RiskLens supports analysis at either the individual or account level, depending on your entity model and available data.
+RiskLens discovers accessible source tables, helps classify them into analysis roles, builds source configurations, and evaluates account or entity-level churn risk with supporting context. The app is designed for teams that want evidence-backed retention signals without standing up a separate ML platform.
 
 ## What it does
 
