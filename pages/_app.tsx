@@ -39,6 +39,20 @@ const CustomApp = (props: TCustomAppProps): ReactElement => {
         `}
       </Script>
 
+      <Script id="tawk-to" strategy="afterInteractive">
+        {`
+          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+          (function(){
+          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+          s1.async=true;
+          s1.src='https://embed.tawk.to/69e4db9f49bb761c347cdcdc/1jmivjpob';
+          s1.charset='UTF-8';
+          s1.setAttribute('crossorigin','*');
+          s0.parentNode.insertBefore(s1,s0);
+          })();
+        `}
+      </Script>
+
       <Head>
         <title>Outermeasure</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />

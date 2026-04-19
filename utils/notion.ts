@@ -32,7 +32,7 @@ const getPageMetas = async (pages: any): Promise<any> => {
   const pageMetas = await Promise.all(
     pages.results
       .filter((page: any) => page.type == "child_page")
-      .map((page: any) => notion.pages.retrieve({ page_id: page.id }))
+      .map((page: any) => notion.pages.retrieve({ page_id: page.id })),
   );
 
   cachedPageMetas = pageMetas;
@@ -49,7 +49,7 @@ export const getSlugs = async (rootPageId: string): Promise<string[]> => {
       replacement: "-",
       lower: true,
       trim: true,
-    })
+    }),
   );
 };
 
@@ -67,8 +67,8 @@ export const getAllPages = async (rootPageId: string) => {
     pageMetas.map((pageMeta: any) =>
       notion.blocks.children.list({
         block_id: pageMeta.id,
-      })
-    )
+      }),
+    ),
   );
 
   blocksBySlug = Object.fromEntries(
@@ -79,7 +79,7 @@ export const getAllPages = async (rootPageId: string) => {
         trim: true,
       }),
       { blocks: blocksList[index], meta: pageMetas[index] },
-    ])
+    ]),
   );
 
   return blocksBySlug;
@@ -97,7 +97,7 @@ export const getPage = async (rootPageId: string, slug: string) => {
         trim: true,
       }),
       pageMeta,
-    ])
+    ]),
   );
 
   if (!(slug in pageMetaBySlug)) {
@@ -105,8 +105,8 @@ export const getPage = async (rootPageId: string, slug: string) => {
       `Cannot find page with slug "${slug}"! Valid slugs are as follows:\n${JSON.stringify(
         Object.keys(pageMetaBySlug),
         null,
-        4
-      )}`
+        4,
+      )}`,
     );
   }
 
@@ -126,17 +126,13 @@ export interface IEnquiry {
 }
 
 export const createEnquiryRow = async (enquiry: IEnquiry): Promise<void> => {
-  try {
-    const response = await notion.pages.create({
-      parent: { database_id: process.env.NOTION_DATABASE_ID! },
-      properties: {
-        Name: { title: [{ text: { content: enquiry.name } }] },
-        Company: { rich_text: [{ text: { content: enquiry.company } }] },
-        Email: { rich_text: [{ text: { content: enquiry.email } }] },
-        Message: { rich_text: [{ text: { content: enquiry.message } }] },
-      },
-    });
-  } catch (error) {
-    console.error("Error creating enquiry:", error);
-  }
+  await notion.pages.create({
+    parent: { database_id: process.env.NOTION_DATABASE_ID! },
+    properties: {
+      Name: { title: [{ text: { content: enquiry.name } }] },
+      Company: { rich_text: [{ text: { content: enquiry.company } }] },
+      Email: { rich_text: [{ text: { content: enquiry.email } }] },
+      Message: { rich_text: [{ text: { content: enquiry.message } }] },
+    },
+  });
 };
